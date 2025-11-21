@@ -1,14 +1,21 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class StringInput {
  
     String input;
     
     public StringInput(String input) {
         validate(input);
-        numValidate(input);
         symbolValidate(input);
         this.input = input;
+    }
+    
+    public List<String> extractArithmeticQueue() {
+        return new ArrayList<>(Arrays.asList(this.input.split(" ")));
     }
     
     private void validate(String input) {
@@ -17,18 +24,11 @@ public class StringInput {
         }
     }
     
-    private void numValidate(String input) {
-        if(input.matches(".*\\d.*")) {
-            return;
-        }
-        throw new IllegalArgumentException("숫자가 없습니다");
-    }
-    
     private void symbolValidate(String input) {
-        if(input.matches(".*[+\\-*/].*")) {
+        if(input.matches("[0-9+\\-*/\\s]+")) {
             return;
         }
-        throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
+        throw new IllegalArgumentException("숫자, 공백, 사칙연산만 포함해야 합니다.");
     }
     
 }
