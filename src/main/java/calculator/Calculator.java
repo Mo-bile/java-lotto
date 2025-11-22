@@ -7,6 +7,10 @@ public class Calculator {
     private final StringInput stringInput;
     private int result;
     
+    public Calculator(String text) {
+        this(new StringInput(text), 0);
+    }
+    
     public Calculator(StringInput stringInput) {
         this(stringInput, 0);
     }
