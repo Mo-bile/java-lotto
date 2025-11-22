@@ -1,41 +1,22 @@
 package calculator;
 
-import java.util.List;
+import calculator.prepare.Prepare;
 
 public class Calculator {
     
-    List<String> ArithmeticQueue;
+    private final StringInput stringInput;
     
-    public Calculator(List<String> arithmeticQueue) {
-        ArithmeticQueue = arithmeticQueue;
+    public Calculator(StringInput stringInput) {
+        this.stringInput = stringInput;
     }
     
     public int calculate() {
-        int result = 0;
-        String operator = null;
-        boolean firstNumber = true;
-        
-        for(String current : ArithmeticQueue) {
-            if (current.matches("[0-9]+")) {
-                int num = Integer.parseInt(current);
-                
-                if (firstNumber) {
-                    result = num;
-                    firstNumber = false;
-                } else {
-                    switch (operator) {
-                        case "+" -> result = result + num;
-                        case "-" -> result = result - num;
-                        case "*" -> result = result * num;
-                        case "/" -> result = result / num;
-                    }
-                }
-            }
-            else if (current.matches("[+\\-*/]")) {
-                operator = current;
-            }
+        Prepare prepare = new Prepare();
+        for(String current : stringInput.extractArithmeticQueue()) {
+            prepare.isNumber(current);
+            prepare.getOperator(current);
         }
-        return result;
+        return prepare.getResult();
     }
     
 }
