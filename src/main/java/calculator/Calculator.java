@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.prepare.ExpressionAccumulator;
+import calculator.prepare.AccumulatorController;
 
 public class Calculator {
     
@@ -17,10 +17,10 @@ public class Calculator {
     }
     
     public int calculate() {
-        ExpressionAccumulator accumulator = new ExpressionAccumulator();
-        for(String current : stringInput.extractArithmeticQueue()) {
-            accumulator.extractOperator(current);
-            this.result = accumulator.accumulateNum(current);
+        AccumulatorController controller = new AccumulatorController();
+        for(String currentSymbol : stringInput.extractArithmeticQueue()) {
+            controller.extractOperator(currentSymbol);
+            this.result = controller.accumulateNum(currentSymbol);
         }
         return this.result;
     }
