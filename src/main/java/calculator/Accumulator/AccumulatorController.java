@@ -1,6 +1,6 @@
-package calculator.prepare;
+package calculator.Accumulator;
 
-import static calculator.prepare.Accumulator.accumulateNumber;
+import static calculator.Accumulator.Accumulator.accumulateNumber;
 
 public class AccumulatorController {
     

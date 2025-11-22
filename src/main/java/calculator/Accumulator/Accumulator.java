@@ -1,4 +1,4 @@
-package calculator.prepare;
+package calculator.Accumulator;
 
 public class Accumulator {
     public static final String ADD_SYMBOL = "+";

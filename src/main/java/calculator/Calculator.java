@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.prepare.AccumulatorController;
+import calculator.Accumulator.AccumulatorController;
 
 public class Calculator {
     

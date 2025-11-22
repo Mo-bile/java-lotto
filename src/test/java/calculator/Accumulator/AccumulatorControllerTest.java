@@ -1,4 +1,4 @@
-package calculator.prepare;
+package calculator.Accumulator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
