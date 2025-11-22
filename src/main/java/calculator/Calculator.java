@@ -1,22 +1,28 @@
 package calculator;
 
-import calculator.prepare.Prepare;
+import calculator.prepare.ExpressionAccumulator;
 
 public class Calculator {
     
     private final StringInput stringInput;
+    private int result;
     
     public Calculator(StringInput stringInput) {
+        this(stringInput, 0);
+    }
+    
+    public Calculator(StringInput stringInput, int result) {
         this.stringInput = stringInput;
+        this.result = result;
     }
     
     public int calculate() {
-        Prepare prepare = new Prepare();
+        ExpressionAccumulator accumulator = new ExpressionAccumulator();
         for(String current : stringInput.extractArithmeticQueue()) {
-            prepare.isNumber(current);
-            prepare.getOperator(current);
+            accumulator.extractOperator(current);
+            this.result = accumulator.accumulateNum(current);
         }
-        return prepare.getResult();
+        return this.result;
     }
     
 }
