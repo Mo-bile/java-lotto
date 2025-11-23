@@ -9,7 +9,7 @@ public class Lotto {
     private final List<Integer> numbers;
     
     public Lotto() {
-        numbers = generateLottoNumber();
+        this.numbers = generateLottoNumber();
     }
     
     private static List<Integer> generateLottoNumber() {
@@ -24,7 +24,7 @@ public class Lotto {
     
     private static List<Integer> generateNumberList() {
         List<Integer> numberList = new ArrayList<>();
-        for(int i = 0; i <= 45; i++) {
+        for(int i = 1; i < 46; i++) {
             numberList.add(i);
         }
         Collections.shuffle(numberList);
@@ -32,7 +32,7 @@ public class Lotto {
     }
     
     public List<Integer> getNumbers() {
-        return numbers;
+        return this.numbers;
     }
     
 }
