@@ -40,6 +40,16 @@ public class Lotto {
         return this.numbers;
     }
     
+    public int findMatchNumbers(List<Integer> winNumbers) {
+        int matchCount = 0;
+        for(Integer number: this.numbers) {
+            if(winNumbers.contains(number)) {
+                matchCount ++;
+            }
+        }
+        return matchCount;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if(o == null || getClass() != o.getClass()) {
