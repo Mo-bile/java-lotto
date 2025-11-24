@@ -2,6 +2,7 @@ package lotto.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.Match;
 
 public class Lottos {
     
@@ -27,24 +28,19 @@ public class Lottos {
         return lottos;
     }
     
-    public Winner findWinners(Lotto winnerLotto) {
-        int threeMatch = 0;
-        int fourMatch = 0;
-        int fiveMatch = 0;
-        int sixMatch = 0;
+    public WinnerCount findWinners(Lotto winnerLotto) {
+        WinnerCount winnerCount = new WinnerCount(0, 0, 0, 0);
         for(Lotto lotto: this.lottoList) {
-            int matchNumbers = lotto.findMatchNumbers(winnerLotto.getNumbers());
-            if(matchNumbers == 3) {
-                threeMatch ++;
-            } else if(matchNumbers == 4) {
-                fourMatch ++;
-            } else if(matchNumbers == 5) {
-                fiveMatch ++;
-            } else if(matchNumbers == 6) {
-                sixMatch++;
+            Match match = Match.fromCount(lotto.findMatchNumbers(winnerLotto.getNumbers()));
+            if (match == null) continue;
+            switch (match) {
+                case THREE_MATCH -> winnerCount.increaseThree();
+                case FOUR_MATCH -> winnerCount.increaseFour();
+                case FIVE_MATCH -> winnerCount.increaseFive();
+                case SIX_MATCH -> winnerCount.increaseSix();
             }
         }
-        return new Winner(threeMatch, fourMatch, fiveMatch, sixMatch);
+        return winnerCount;
     }
     
 }

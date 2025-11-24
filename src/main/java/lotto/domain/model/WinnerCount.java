@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-public class Winner {
+public class WinnerCount {
     private int threeMatch;
     private int fourMatch;
     private int fiveMatch;
     private int sixMatch;
     
-    public Winner(int threeMatch, int fourMatch, int fiveMatch, int sixMatch) {
+    public WinnerCount(int threeMatch, int fourMatch, int fiveMatch, int sixMatch) {
         this.threeMatch = threeMatch;
         this.fourMatch = fourMatch;
         this.fiveMatch = fiveMatch;
@@ -28,6 +28,22 @@ public class Winner {
         
         BigDecimal rate = profit.divide(costBd, 2, RoundingMode.DOWN);
         return rate.toPlainString();
+    }
+    
+    public void increaseThree() {
+        this.threeMatch ++;
+    }
+    
+    public void increaseFour() {
+        this.fourMatch ++;
+    }
+    
+    public void increaseFive() {
+        this.fiveMatch ++;
+    }
+    
+    public void increaseSix() {
+        this.sixMatch ++;
     }
     
     public int getThreeMatch() {
@@ -51,8 +67,8 @@ public class Winner {
         if(o == null || getClass() != o.getClass()) {
             return false;
         }
-        Winner winner = (Winner) o;
-        return threeMatch == winner.threeMatch && fourMatch == winner.fourMatch && fiveMatch == winner.fiveMatch && sixMatch == winner.sixMatch;
+        WinnerCount winnerCount = (WinnerCount) o;
+        return threeMatch == winnerCount.threeMatch && fourMatch == winnerCount.fourMatch && fiveMatch == winnerCount.fiveMatch && sixMatch == winnerCount.sixMatch;
     }
     
     @Override

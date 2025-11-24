@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.Lottos;
-import lotto.domain.model.Winner;
+import lotto.domain.model.WinnerCount;
 
 public class Process {
     
@@ -29,7 +29,7 @@ public class Process {
         return this.lottos.getLottoList();
     }
     
-    public Winner showWinners(String winnerLottoNumber) {
+    public WinnerCount showWinners(String winnerLottoNumber) {
         List<Integer> numbers = new ArrayList<>();
         for(String s: winnerLottoNumber.replace(" ", "").split(",")) {
             numbers.add(Integer.parseInt(s));

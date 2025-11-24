@@ -1,7 +1,6 @@
 package lotto.domain.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -19,8 +18,8 @@ class LottosTest {
         Lottos lottos = new Lottos(List.of(
             new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(40, 41, 42, 43, 44, 45))));
         
-        Winner winner = lottos.findWinners(new Lotto(List.of(35, 36, 37, 43, 44, 45)));
-        Winner exptedwinner = new Winner(1, 0, 0, 0);
-        assertThat(winner).isEqualTo(exptedwinner);
+        WinnerCount winnerCount = lottos.findWinners(new Lotto(List.of(35, 36, 37, 43, 44, 45)));
+        WinnerCount exptedwinner = new WinnerCount(1, 0, 0, 0);
+        assertThat(winnerCount).isEqualTo(exptedwinner);
     }
 }
