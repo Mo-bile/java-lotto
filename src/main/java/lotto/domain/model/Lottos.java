@@ -27,20 +27,20 @@ public class Lottos {
         return lottos;
     }
     
-    public Winner findWinners(List<Lotto> lottoList) {
+    public Winner findWinners(Lotto winnerLotto) {
         int threeMatch = 0;
         int fourMatch = 0;
         int fiveMatch = 0;
         int sixMatch = 0;
-        for(Lotto lotto: lottoList) {
-            int matchNumbers = lotto.findMatchNumbers(lotto.getNumbers());
-            if(matchNumbers == 2) {
+        for(Lotto lotto: this.lottoList) {
+            int matchNumbers = lotto.findMatchNumbers(winnerLotto.getNumbers());
+            if(matchNumbers == 3) {
                 threeMatch ++;
-            } else if(matchNumbers == 3) {
-                fourMatch ++;
             } else if(matchNumbers == 4) {
-                fiveMatch ++;
+                fourMatch ++;
             } else if(matchNumbers == 5) {
+                fiveMatch ++;
+            } else if(matchNumbers == 6) {
                 sixMatch++;
             }
         }
