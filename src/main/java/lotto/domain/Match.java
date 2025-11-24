@@ -1,19 +1,40 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import lotto.domain.model.WinnerCount;
+
 public enum Match {
-    THREE_MATCH(3),
-    FOUR_MATCH(4),
-    FIVE_MATCH(5),
-    SIX_MATCH(6);
+    THREE_MATCH(3, 5_000){
+        @Override
+        public void increase(WinnerCount winnerCount) {
+            winnerCount.increaseThree();
+        }
+    },
+    FOUR_MATCH(4, 50_000){
+        @Override
+        public void increase(WinnerCount winnerCount) {
+            winnerCount.increaseFour();
+        }
+    },
+    FIVE_MATCH(5, 1_500_000){
+        @Override
+        public void increase(WinnerCount winnerCount) {
+            winnerCount.increaseFive();
+        }
+    },
+    SIX_MATCH(6, 2_000_000_000){
+        @Override
+        public void increase(WinnerCount winnerCount) {
+            winnerCount.increaseSix();
+        }
+    };
     
     private final int matchNumber;
+    private final long winnerReturn;
     
-    Match(int matchNumber) {
+    Match(int matchNumber, long winnerReturn) {
         this.matchNumber = matchNumber;
-    }
-    
-    public int getMatchNumber() {
-        return matchNumber;
+        this.winnerReturn = winnerReturn;
     }
     
     public static Match fromCount(int count) {
@@ -22,4 +43,11 @@ public enum Match {
         }
         return null;
     }
+    
+    public long getWinnerReturn() {
+        return winnerReturn;
+    }
+    
+    public abstract void increase(WinnerCount winnerCount);
+    
 }

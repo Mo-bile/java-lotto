@@ -1,5 +1,7 @@
 package lotto.domain.model;
 
+import static lotto.domain.Match.*;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
@@ -24,25 +26,34 @@ public class WinnerCount {
     
     public String calculateTotalReturn(int cost) {
         BigDecimal profit = BigDecimal.ZERO;
-        profit = profit.add(BigDecimal.valueOf(this.threeMatch).multiply(BigDecimal.valueOf(5_000)));
-        profit = profit.add(BigDecimal.valueOf(this.fourMatch).multiply(BigDecimal.valueOf(50_000)));
-        profit = profit.add(BigDecimal.valueOf(this.fiveMatch).multiply(BigDecimal.valueOf(1_500_000)));
-        profit = profit.add(BigDecimal.valueOf(this.sixMatch).multiply(BigDecimal.valueOf(2_000_000_000L)));
-        
+        profit = profit.add(BigDecimal.valueOf(this.threeMatch).multiply(BigDecimal.valueOf(THREE_MATCH.getWinnerReturn())));
+        profit = profit.add(BigDecimal.valueOf(this.fourMatch).multiply(BigDecimal.valueOf(FOUR_MATCH.getWinnerReturn())));
+        profit = profit.add(BigDecimal.valueOf(this.fiveMatch).multiply(BigDecimal.valueOf(FIVE_MATCH.getWinnerReturn())));
+        profit = profit.add(BigDecimal.valueOf(this.sixMatch).multiply(BigDecimal.valueOf(SIX_MATCH.getWinnerReturn())));
         BigDecimal costBd = BigDecimal.valueOf(cost);
-        
         BigDecimal rate = profit.divide(costBd, 2, RoundingMode.DOWN);
         return rate.toPlainString();
     }
     
     public void increaseMatch(Match match) {
         if (match == null) return;
-        switch (match) {
-            case THREE_MATCH -> this.threeMatch ++;
-            case FOUR_MATCH -> this.fourMatch ++;
-            case FIVE_MATCH -> this.fiveMatch ++;
-            case SIX_MATCH -> this.sixMatch ++;
-        }
+        match.increase(this);
+    }
+    
+    public void increaseThree() {
+        this.threeMatch ++;
+    }
+    
+    public void increaseFour() {
+        this.fourMatch ++;
+    }
+    
+    public void increaseFive() {
+        this.fiveMatch ++;
+    }
+    
+    public void increaseSix() {
+        this.sixMatch ++;
     }
     
     public int getThreeMatch() {
