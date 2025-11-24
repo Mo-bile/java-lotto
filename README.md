@@ -50,8 +50,19 @@
   - [x] : 총 가격대비 얼마 이득인지 수익률을 계산한다
 
 ## 클래스 다이어그램 설계
-### 초기 도메인 목록과 역할
+### 도메인 목록과 역할
 - `Process` : 로또 진행 흐름을 담당 (입력받은 금액을 갯수로 바꾼다.)
 - `Lottos` : 입력받은 갯수에 따라 `Lotto` 객체 생성
 - `Lotto` : 로또 역할, 입력받은 당첨번호로 당첨인지 확인
-- `Winner` : 당첨번호 입력 및 당첨 통계 추리기
+- `WinnerCount` : 당첨번호 입력 및 당첨 통계 추리기
+
+
+## 리팩터링
+### `WinnerCount`
+- `WinnerCount`를 Process 객체의 멤버로 넣어야 할 것인가?
+  - 그러나 `Process` 내부 다른 `Lottos`필드와 와 생명주기가 다름
+  - `Lottos`는 초반에 생기지만, `WinnerCount` 후반에 생김
+  - `WinnerCount` 에 있는 `calculateTotalReturn()` 메서드에 인자로 pay를 넣는게 바람직한가 고민이 듬
+    - 왜냐하면 `Process` 필드로 pay가 있는데 이것을 활용하지 못하고, controller에서 입력받은 pay를 활용해서 넣기 때문임
+- 3,4,5,6개 일치관련 enum 처리
+  - switch 대신에 대안은 -> enum으로 행동넣기
