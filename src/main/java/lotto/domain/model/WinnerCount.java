@@ -3,12 +3,17 @@ package lotto.domain.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
+import lotto.domain.Match;
 
 public class WinnerCount {
     private int threeMatch;
     private int fourMatch;
     private int fiveMatch;
     private int sixMatch;
+    
+    public WinnerCount() {
+        this(0, 0, 0, 0);
+    }
     
     public WinnerCount(int threeMatch, int fourMatch, int fiveMatch, int sixMatch) {
         this.threeMatch = threeMatch;
@@ -30,20 +35,14 @@ public class WinnerCount {
         return rate.toPlainString();
     }
     
-    public void increaseThree() {
-        this.threeMatch ++;
-    }
-    
-    public void increaseFour() {
-        this.fourMatch ++;
-    }
-    
-    public void increaseFive() {
-        this.fiveMatch ++;
-    }
-    
-    public void increaseSix() {
-        this.sixMatch ++;
+    public void increaseMatch(Match match) {
+        if (match == null) return;
+        switch (match) {
+            case THREE_MATCH -> this.threeMatch ++;
+            case FOUR_MATCH -> this.fourMatch ++;
+            case FIVE_MATCH -> this.fiveMatch ++;
+            case SIX_MATCH -> this.sixMatch ++;
+        }
     }
     
     public int getThreeMatch() {

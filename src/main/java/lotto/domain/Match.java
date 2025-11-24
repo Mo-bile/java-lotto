@@ -6,19 +6,19 @@ public enum Match {
     FIVE_MATCH(5),
     SIX_MATCH(6);
     
-    private final int count;
+    private final int matchNumber;
     
-    Match(int count) {
-        this.count = count;
+    Match(int matchNumber) {
+        this.matchNumber = matchNumber;
     }
     
-    public int getCount() {
-        return count;
+    public int getMatchNumber() {
+        return matchNumber;
     }
     
     public static Match fromCount(int count) {
         for (Match m : values()) {
-            if (m.count == count) return m;
+            if (m.matchNumber == count) return m;
         }
         return null;
     }

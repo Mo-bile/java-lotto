@@ -29,16 +29,10 @@ public class Lottos {
     }
     
     public WinnerCount findWinners(Lotto winnerLotto) {
-        WinnerCount winnerCount = new WinnerCount(0, 0, 0, 0);
+        WinnerCount winnerCount = new WinnerCount();
         for(Lotto lotto: this.lottoList) {
             Match match = Match.fromCount(lotto.findMatchNumbers(winnerLotto.getNumbers()));
-            if (match == null) continue;
-            switch (match) {
-                case THREE_MATCH -> winnerCount.increaseThree();
-                case FOUR_MATCH -> winnerCount.increaseFour();
-                case FIVE_MATCH -> winnerCount.increaseFive();
-                case SIX_MATCH -> winnerCount.increaseSix();
-            }
+            winnerCount.increaseMatch(match);
         }
         return winnerCount;
     }
