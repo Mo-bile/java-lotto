@@ -20,20 +20,16 @@ public class Winner {
     }
     
     public String calculateTotalReturn(int cost) {
-        float lottoProfit = 0;
-        if(this.threeMatch != 0) {
-            lottoProfit = this.threeMatch * 5000;
-        } else if(this.fourMatch != 0) {
-            lottoProfit = this.fourMatch * 50000;
-        } else if(this.fiveMatch != 0) {
-            lottoProfit = this.fiveMatch * 1500000;
-        } else if(this.sixMatch != 0) {
-            lottoProfit = this.sixMatch * 2000000000;
-        }
-        float result = lottoProfit / cost;
-        BigDecimal bd = BigDecimal.valueOf(result).
-            setScale(2, RoundingMode.DOWN);
-        return bd.toPlainString();
+        BigDecimal profit = BigDecimal.ZERO;
+        profit = profit.add(BigDecimal.valueOf(this.threeMatch).multiply(BigDecimal.valueOf(5_000)));
+        profit = profit.add(BigDecimal.valueOf(this.fourMatch).multiply(BigDecimal.valueOf(50_000)));
+        profit = profit.add(BigDecimal.valueOf(this.fiveMatch).multiply(BigDecimal.valueOf(1_500_000)));
+        profit = profit.add(BigDecimal.valueOf(this.sixMatch).multiply(BigDecimal.valueOf(2_000_000_000L)));
+        
+        BigDecimal costBd = BigDecimal.valueOf(cost);
+        
+        BigDecimal rate = profit.divide(costBd, 2, RoundingMode.DOWN);
+        return rate.toPlainString();
     }
     
     public int getThreeMatch() {
