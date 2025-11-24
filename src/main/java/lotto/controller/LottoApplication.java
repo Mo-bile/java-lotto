@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.business.Process;
+import lotto.domain.model.Winner;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -11,6 +12,10 @@ public class LottoApplication {
         
         Process process = new Process(amount);
         ResultView.printLottos(process.getLottos());
+        
+        String winningNumbers = InputView.inputWinningNumbers();
+        Winner winner = process.showWinners(winningNumbers);
+        ResultView.printResult(winner, winner.calculateTotalReturn(amount));
         
     }
 }

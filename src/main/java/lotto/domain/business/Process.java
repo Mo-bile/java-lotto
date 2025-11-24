@@ -1,8 +1,10 @@
 package lotto.domain.business;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.Lottos;
+import lotto.domain.model.Winner;
 
 public class Process {
     
@@ -25,6 +27,14 @@ public class Process {
     
     public List<Lotto> getLottos() {
         return this.lottos.getLottoList();
+    }
+    
+    public Winner showWinners(String winnerLottoNumber) {
+        List<Integer> numbers = new ArrayList<>();
+        for(String s: winnerLottoNumber.split(", ")) {
+            numbers.add(Integer.parseInt(s));
+        }
+        return this.lottos.findWinners(new Lotto(numbers));
     }
     
     private void validate(int pay) {

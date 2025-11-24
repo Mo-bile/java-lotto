@@ -36,6 +36,22 @@ public class Winner {
         return bd.toPlainString();
     }
     
+    public int getThreeMatch() {
+        return threeMatch;
+    }
+    
+    public int getFourMatch() {
+        return fourMatch;
+    }
+    
+    public int getFiveMatch() {
+        return fiveMatch;
+    }
+    
+    public int getSixMatch() {
+        return sixMatch;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if(o == null || getClass() != o.getClass()) {
