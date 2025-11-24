@@ -34,7 +34,7 @@ class WinnerCountTest {
     @Test
     void 일치하는_정보가_있으면_해당하는_일치갯수1을_증가시킨다() {
         WinnerCount winnerCount = new WinnerCount();
-        winnerCount.increaseMatch(Match.fromCount(5));
+        winnerCount.increaseMatch(Match.fromLottoNumber(5));
         assertThat(winnerCount).isEqualTo(new WinnerCount(0, 0, 1, 0));
     }
     

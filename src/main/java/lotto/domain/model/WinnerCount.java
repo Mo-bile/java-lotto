@@ -25,14 +25,19 @@ public class WinnerCount {
     }
     
     public String calculateTotalReturn(int cost) {
+        BigDecimal profit = getProfit();
+        BigDecimal costBd = BigDecimal.valueOf(cost);
+        BigDecimal rate = profit.divide(costBd, 2, RoundingMode.DOWN);
+        return rate.toPlainString();
+    }
+    
+    private BigDecimal getProfit() {
         BigDecimal profit = BigDecimal.ZERO;
         profit = profit.add(BigDecimal.valueOf(this.threeMatch).multiply(BigDecimal.valueOf(THREE_MATCH.getWinnerReturn())));
         profit = profit.add(BigDecimal.valueOf(this.fourMatch).multiply(BigDecimal.valueOf(FOUR_MATCH.getWinnerReturn())));
         profit = profit.add(BigDecimal.valueOf(this.fiveMatch).multiply(BigDecimal.valueOf(FIVE_MATCH.getWinnerReturn())));
         profit = profit.add(BigDecimal.valueOf(this.sixMatch).multiply(BigDecimal.valueOf(SIX_MATCH.getWinnerReturn())));
-        BigDecimal costBd = BigDecimal.valueOf(cost);
-        BigDecimal rate = profit.divide(costBd, 2, RoundingMode.DOWN);
-        return rate.toPlainString();
+        return profit;
     }
     
     public void increaseMatch(Match match) {

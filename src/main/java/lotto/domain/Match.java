@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
 import lotto.domain.model.WinnerCount;
 
 public enum Match {
@@ -37,9 +36,9 @@ public enum Match {
         this.winnerReturn = winnerReturn;
     }
     
-    public static Match fromCount(int count) {
+    public static Match fromLottoNumber(int lottoNumber) {
         for (Match m : values()) {
-            if (m.matchNumber == count) return m;
+            if (m.matchNumber == lottoNumber) return m;
         }
         return null;
     }

@@ -31,7 +31,7 @@ public class Lottos {
     public WinnerCount findWinners(Lotto winnerLotto) {
         WinnerCount winnerCount = new WinnerCount();
         for(Lotto lotto: this.lottoList) {
-            Match match = Match.fromCount(lotto.findMatchNumbers(winnerLotto.getNumbers()));
+            Match match = Match.fromLottoNumber(lotto.findMatchNumbers(winnerLotto.getNumbers()));
             winnerCount.increaseMatch(match);
         }
         return winnerCount;

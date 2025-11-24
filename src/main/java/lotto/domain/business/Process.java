@@ -31,10 +31,14 @@ public class Process {
     
     public WinnerCount showWinners(String winnerLottoNumber) {
         List<Integer> numbers = new ArrayList<>();
-        for(String s: winnerLottoNumber.replace(" ", "").split(",")) {
-            numbers.add(Integer.parseInt(s));
+        for(String number: extractWinnerLottoNumber(winnerLottoNumber)) {
+            numbers.add(Integer.parseInt(number));
         }
         return this.lottos.findWinners(new Lotto(numbers));
+    }
+    
+    private String[] extractWinnerLottoNumber(String winnerLottoNumber) {
+        return winnerLottoNumber.replace(" ", "").split(",");
     }
     
     private void validate(int pay) {
