@@ -8,14 +8,14 @@ import lotto.view.ResultView;
 public class LottoApplication {
     
     public static void main(String[] args) {
-        int amount = InputView.inputPurchaseAmount();
+        int pay = InputView.inputPurchaseAmount();
         
-        Process process = new Process(amount);
+        Process process = new Process(pay);
         ResultView.printLottos(process.getLottos());
         
         String winningNumbers = InputView.inputWinningNumbers();
         WinnerCount winnerCount = process.showWinners(winningNumbers);
-        String totalReturn = winnerCount.calculateTotalReturn(amount);
+        String totalReturn = winnerCount.calculateTotalReturn(pay);
         ResultView.printResult(winnerCount, totalReturn);
     }
 }

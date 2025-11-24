@@ -24,9 +24,9 @@ public class WinnerCount {
         this.sixMatch = sixMatch;
     }
     
-    public String calculateTotalReturn(int cost) {
+    public String calculateTotalReturn(int pay) {
         BigDecimal profit = getProfit();
-        BigDecimal costBd = BigDecimal.valueOf(cost);
+        BigDecimal costBd = BigDecimal.valueOf(pay);
         BigDecimal rate = profit.divide(costBd, 2, RoundingMode.DOWN);
         return rate.toPlainString();
     }
