@@ -31,7 +31,7 @@ public class Process {
     
     public Winner showWinners(String winnerLottoNumber) {
         List<Integer> numbers = new ArrayList<>();
-        for(String s: winnerLottoNumber.split(", ")) {
+        for(String s: winnerLottoNumber.replace(" ", "").split(",")) {
             numbers.add(Integer.parseInt(s));
         }
         return this.lottos.findWinners(new Lotto(numbers));

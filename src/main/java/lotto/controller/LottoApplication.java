@@ -15,7 +15,7 @@ public class LottoApplication {
         
         String winningNumbers = InputView.inputWinningNumbers();
         Winner winner = process.showWinners(winningNumbers);
-        ResultView.printResult(winner, winner.calculateTotalReturn(amount));
-        
+        String totalReturn = winner.calculateTotalReturn(amount);
+        ResultView.printResult(winner, totalReturn);
     }
 }

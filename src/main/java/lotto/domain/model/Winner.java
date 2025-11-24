@@ -2,8 +2,6 @@ package lotto.domain.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.util.List;
 import java.util.Objects;
 
 public class Winner {
