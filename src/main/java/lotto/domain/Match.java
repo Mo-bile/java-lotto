@@ -6,25 +6,25 @@ public enum Match {
     THREE_MATCH(3, 5_000){
         @Override
         public void increase(WinningResult winningResult) {
-            winningResult.increaseThree();
+            winningResult.increaseCount(this);
         }
     },
     FOUR_MATCH(4, 50_000){
         @Override
         public void increase(WinningResult winningResult) {
-            winningResult.increaseFour();
+            winningResult.increaseCount(this);
         }
     },
     FIVE_MATCH(5, 1_500_000){
         @Override
         public void increase(WinningResult winningResult) {
-            winningResult.increaseFive();
+            winningResult.increaseCount(this);
         }
     },
     SIX_MATCH(6, 2_000_000_000){
         @Override
         public void increase(WinningResult winningResult) {
-            winningResult.increaseSix();
+            winningResult.increaseCount(this);
         }
     };
     

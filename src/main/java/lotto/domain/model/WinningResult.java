@@ -1,19 +1,21 @@
 package lotto.domain.model;
 
-import static lotto.domain.Match.*;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import lotto.domain.Match;
 
 public class WinningResult {
+    
+    public static final int INITIAL_MATCH_COUNT = 0;
     private final Map<Match, Integer> matchMap;
     
     public WinningResult() {
-        this(initMatchMap(0, 0, 0, 0));
+        this(initMatchMap(INITIAL_MATCH_COUNT, INITIAL_MATCH_COUNT, INITIAL_MATCH_COUNT, INITIAL_MATCH_COUNT));
     }
     
     public WinningResult(int threeMatchCount, int fourMatchCount, int fiveMatchCount, int sixMatchCount) {
@@ -26,11 +28,14 @@ public class WinningResult {
     
     private static Map<Match, Integer> initMatchMap(int threeMatchCount, int fourMatchCount, int fiveMatchCount, int sixMatchCount) {
         Map<Match, Integer> matchMap = new HashMap<>();
-        matchMap.put(Match.THREE_MATCH, threeMatchCount);
-        matchMap.put(Match.FOUR_MATCH, fourMatchCount);
-        matchMap.put(Match.FIVE_MATCH, fiveMatchCount);
-        matchMap.put(Match.SIX_MATCH, sixMatchCount);
+        iteratorMatchMap(matchMap, List.of(threeMatchCount, fourMatchCount, fiveMatchCount, sixMatchCount));
         return matchMap;
+    }
+    
+    private static void iteratorMatchMap(Map<Match, Integer> matchMap, List<Integer> count) {
+        for(int i = 0; i < Match.values().length; i++) {
+            matchMap.put(Match.values()[i], count.get(i));
+        }
     }
     
     public String calculateTotalReturn(int pay) {
@@ -42,10 +47,9 @@ public class WinningResult {
     
     private BigDecimal getProfit() {
         BigDecimal profit = BigDecimal.ZERO;
-        profit = profit.add(BigDecimal.valueOf(this.matchMap.get(THREE_MATCH)).multiply(BigDecimal.valueOf(THREE_MATCH.getWinnerReturn())));
-        profit = profit.add(BigDecimal.valueOf(this.matchMap.get(FOUR_MATCH)).multiply(BigDecimal.valueOf(FOUR_MATCH.getWinnerReturn())));
-        profit = profit.add(BigDecimal.valueOf(this.matchMap.get(FIVE_MATCH)).multiply(BigDecimal.valueOf(FIVE_MATCH.getWinnerReturn())));
-        profit = profit.add(BigDecimal.valueOf(this.matchMap.get(SIX_MATCH)).multiply(BigDecimal.valueOf(SIX_MATCH.getWinnerReturn())));
+        for(Entry<Match, Integer> matchIntegerEntry: matchMap.entrySet()) {
+            profit = profit.add(BigDecimal.valueOf(matchIntegerEntry.getValue()).multiply(BigDecimal.valueOf(matchIntegerEntry.getKey().getWinnerReturn())));
+        }
         return profit;
     }
     
@@ -54,20 +58,11 @@ public class WinningResult {
         match.increase(this);
     }
     
-    public void increaseThree() {
-        this.matchMap.compute(THREE_MATCH, (k, threeMatch) -> threeMatch + 1);
-    }
-    
-    public void increaseFour() {
-        this.matchMap.compute(FOUR_MATCH, (k, FOUR_MATCH) -> FOUR_MATCH + 1);
-    }
-    
-    public void increaseFive() {
-        this.matchMap.compute(FIVE_MATCH, (k, FIVE_MATCH) -> FIVE_MATCH + 1);
-    }
-    
-    public void increaseSix() {
-        this.matchMap.compute(SIX_MATCH, (k, SIX_MATCH) -> SIX_MATCH + 1);
+    public void increaseCount(Match match) {
+        this.matchMap.compute(match, (k, count) -> {
+            if(count == null) return INITIAL_MATCH_COUNT;
+            return count + 1;
+        });
     }
     
     public int getMatchCount(Match match) {
