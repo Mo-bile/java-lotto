@@ -42,7 +42,7 @@ public class Lotto {
     }
     
     private static List<Integer> setUpLottoNumber(List<Integer> numberList) {
-        List<Integer> lottoNumbers = numberList.subList(0, 6);
+        List<Integer> lottoNumbers = new ArrayList<>(numberList.subList(0, 6));
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
