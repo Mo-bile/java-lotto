@@ -52,10 +52,10 @@ public record WinningResult(Map<Match, Integer> matchMap) {
         if(match == null) {
             return;
         }
-        match.increase(this);
+        this.increaseCount(match);
     }
     
-    public void increaseCount(Match match) {
+    private void increaseCount(Match match) {
         this.matchMap.compute(match, (k, count) -> {
             if(count == null) {
                 return INITIAL_MATCH_COUNT;

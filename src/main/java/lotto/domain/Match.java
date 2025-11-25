@@ -3,30 +3,10 @@ package lotto.domain;
 import lotto.domain.model.WinningResult;
 
 public enum Match {
-    THREE_MATCH(3, 5_000){
-        @Override
-        public void increase(WinningResult winningResult) {
-            winningResult.increaseCount(this);
-        }
-    },
-    FOUR_MATCH(4, 50_000){
-        @Override
-        public void increase(WinningResult winningResult) {
-            winningResult.increaseCount(this);
-        }
-    },
-    FIVE_MATCH(5, 1_500_000){
-        @Override
-        public void increase(WinningResult winningResult) {
-            winningResult.increaseCount(this);
-        }
-    },
-    SIX_MATCH(6, 2_000_000_000){
-        @Override
-        public void increase(WinningResult winningResult) {
-            winningResult.increaseCount(this);
-        }
-    };
+    THREE_MATCH(3, 5_000),
+    FOUR_MATCH(4, 50_000),
+    FIVE_MATCH(5, 1_500_000),
+    SIX_MATCH(6, 2_000_000_000);
     
     private final int matchNumber;
     private final long winnerReturn;
@@ -46,7 +26,4 @@ public enum Match {
     public long getWinnerReturn() {
         return winnerReturn;
     }
-    
-    public abstract void increase(WinningResult winningResult);
-    
 }
