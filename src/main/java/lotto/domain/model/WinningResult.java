@@ -4,24 +4,33 @@ import static lotto.domain.Match.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import lotto.domain.Match;
 
 public class WinningResult {
-    private int threeMatch;
-    private int fourMatch;
-    private int fiveMatch;
-    private int sixMatch;
+    private final Map<Match, Integer> matchMap;
     
     public WinningResult() {
-        this(0, 0, 0, 0);
+        this(initMatchMap(0, 0, 0, 0));
     }
     
-    public WinningResult(int threeMatch, int fourMatch, int fiveMatch, int sixMatch) {
-        this.threeMatch = threeMatch;
-        this.fourMatch = fourMatch;
-        this.fiveMatch = fiveMatch;
-        this.sixMatch = sixMatch;
+    public WinningResult(int threeMatchCount, int fourMatchCount, int fiveMatchCount, int sixMatchCount) {
+        this(initMatchMap(threeMatchCount, fourMatchCount, fiveMatchCount, sixMatchCount));
+    }
+    
+    public WinningResult(Map<Match, Integer> matchMap) {
+        this.matchMap = matchMap;
+    }
+    
+    private static Map<Match, Integer> initMatchMap(int threeMatchCount, int fourMatchCount, int fiveMatchCount, int sixMatchCount) {
+        Map<Match, Integer> matchMap = new HashMap<>();
+        matchMap.put(Match.THREE_MATCH, threeMatchCount);
+        matchMap.put(Match.FOUR_MATCH, fourMatchCount);
+        matchMap.put(Match.FIVE_MATCH, fiveMatchCount);
+        matchMap.put(Match.SIX_MATCH, sixMatchCount);
+        return matchMap;
     }
     
     public String calculateTotalReturn(int pay) {
@@ -33,10 +42,10 @@ public class WinningResult {
     
     private BigDecimal getProfit() {
         BigDecimal profit = BigDecimal.ZERO;
-        profit = profit.add(BigDecimal.valueOf(this.threeMatch).multiply(BigDecimal.valueOf(THREE_MATCH.getWinnerReturn())));
-        profit = profit.add(BigDecimal.valueOf(this.fourMatch).multiply(BigDecimal.valueOf(FOUR_MATCH.getWinnerReturn())));
-        profit = profit.add(BigDecimal.valueOf(this.fiveMatch).multiply(BigDecimal.valueOf(FIVE_MATCH.getWinnerReturn())));
-        profit = profit.add(BigDecimal.valueOf(this.sixMatch).multiply(BigDecimal.valueOf(SIX_MATCH.getWinnerReturn())));
+        profit = profit.add(BigDecimal.valueOf(this.matchMap.get(THREE_MATCH)).multiply(BigDecimal.valueOf(THREE_MATCH.getWinnerReturn())));
+        profit = profit.add(BigDecimal.valueOf(this.matchMap.get(FOUR_MATCH)).multiply(BigDecimal.valueOf(FOUR_MATCH.getWinnerReturn())));
+        profit = profit.add(BigDecimal.valueOf(this.matchMap.get(FIVE_MATCH)).multiply(BigDecimal.valueOf(FIVE_MATCH.getWinnerReturn())));
+        profit = profit.add(BigDecimal.valueOf(this.matchMap.get(SIX_MATCH)).multiply(BigDecimal.valueOf(SIX_MATCH.getWinnerReturn())));
         return profit;
     }
     
@@ -46,35 +55,23 @@ public class WinningResult {
     }
     
     public void increaseThree() {
-        this.threeMatch ++;
+        this.matchMap.compute(THREE_MATCH, (k, threeMatch) -> threeMatch + 1);
     }
     
     public void increaseFour() {
-        this.fourMatch ++;
+        this.matchMap.compute(FOUR_MATCH, (k, FOUR_MATCH) -> FOUR_MATCH + 1);
     }
     
     public void increaseFive() {
-        this.fiveMatch ++;
+        this.matchMap.compute(FIVE_MATCH, (k, FIVE_MATCH) -> FIVE_MATCH + 1);
     }
     
     public void increaseSix() {
-        this.sixMatch ++;
+        this.matchMap.compute(SIX_MATCH, (k, SIX_MATCH) -> SIX_MATCH + 1);
     }
     
-    public int getThreeMatch() {
-        return threeMatch;
-    }
-    
-    public int getFourMatch() {
-        return fourMatch;
-    }
-    
-    public int getFiveMatch() {
-        return fiveMatch;
-    }
-    
-    public int getSixMatch() {
-        return sixMatch;
+    public int getMatchCount(Match match) {
+        return this.matchMap.get(match);
     }
     
     @Override
@@ -82,12 +79,12 @@ public class WinningResult {
         if(o == null || getClass() != o.getClass()) {
             return false;
         }
-        WinningResult winningResult = (WinningResult) o;
-        return threeMatch == winningResult.threeMatch && fourMatch == winningResult.fourMatch && fiveMatch == winningResult.fiveMatch && sixMatch == winningResult.sixMatch;
+        WinningResult that = (WinningResult) o;
+        return Objects.equals(matchMap, that.matchMap);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(threeMatch, fourMatch, fiveMatch, sixMatch);
+        return Objects.hashCode(matchMap);
     }
 }
