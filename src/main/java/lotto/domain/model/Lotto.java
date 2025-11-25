@@ -8,6 +8,12 @@ import lotto.domain.Match;
 
 public class Lotto {
     
+    public static final String SPACE = " ";
+    public static final String EMPTY = "";
+    public static final String COMMA = ",";
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 46;
+    public static final int INITIAL_MATCH_COUNT = 0;
     private final List<Integer> numbers;
     
     public Lotto() {
@@ -35,7 +41,7 @@ public class Lotto {
     }
     
     private static String[] extractWinnerLottoNumber(String winnerLottoNumber) {
-        return winnerLottoNumber.replace(" ", "").split(",");
+        return winnerLottoNumber.replace(SPACE, EMPTY).split(COMMA);
     }
     
     private static List<Integer> generateLottoNumberByPay() {
@@ -50,7 +56,7 @@ public class Lotto {
     
     private static List<Integer> generateNumberList() {
         List<Integer> numberList = new ArrayList<>();
-        for(int i = 1; i < 46; i++) {
+        for(int i = MIN_LOTTO_NUMBER; i < MAX_LOTTO_NUMBER; i++) {
             numberList.add(i);
         }
         Collections.shuffle(numberList);
@@ -66,7 +72,7 @@ public class Lotto {
     }
     
     public int findMatchCount(List<Integer> winNumbers) {
-        int matchCount = 0;
+        int matchCount = INITIAL_MATCH_COUNT;
         for(Integer number: this.numbers) {
             if(winNumbers.contains(number)) {
                 matchCount ++;
