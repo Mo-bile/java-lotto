@@ -31,7 +31,7 @@ public class Lottos {
     public WinningResult findWinners(Lotto winnerLotto) {
         WinningResult winningResult = new WinningResult();
         for(Lotto lotto: this.lottoList) {
-            winningResult.increaseMatch(lotto.match(winnerLotto.getNumbers()));
+            winningResult.increaseMatch(lotto.match(winnerLotto));
         }
         return winningResult;
     }

@@ -61,8 +61,8 @@ public class Lotto {
         return this.numbers;
     }
     
-    public Match match(List<Integer> winNumbers) {
-        return Match.fromLottoNumber(findMatchCount(winNumbers));
+    public Match match(Lotto winNumbers) {
+        return Match.fromLottoNumber(findMatchCount(winNumbers.numbers));
     }
     
     public int findMatchCount(List<Integer> winNumbers) {
