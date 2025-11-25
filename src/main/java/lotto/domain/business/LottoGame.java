@@ -30,15 +30,7 @@ public class LottoGame {
     }
     
     public WinningResult showWinners(String winnerLottoNumber) {
-        List<Integer> numbers = new ArrayList<>();
-        for(String number: extractWinnerLottoNumber(winnerLottoNumber)) {
-            numbers.add(Integer.parseInt(number));
-        }
-        return this.lottos.findWinners(new Lotto(numbers));
-    }
-    
-    private String[] extractWinnerLottoNumber(String winnerLottoNumber) {
-        return winnerLottoNumber.replace(" ", "").split(",");
+        return this.lottos.findWinners(new Lotto(winnerLottoNumber));
     }
     
     private void validate(int pay) {

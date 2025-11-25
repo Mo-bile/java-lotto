@@ -10,14 +10,34 @@ public class Lotto {
     private final List<Integer> numbers;
     
     public Lotto() {
-        this(generateLottoNumber());
+        this(generateLottoNumberByPay());
+    }
+    
+    public Lotto(String lottoNumbers) {
+        this(generateLottoNumberByInput(lottoNumbers));
+    }
+    
+    public Lotto(int numA, int numB, int numC, int numD, int numE, int numF) {
+        this(List.of(numA, numB, numC, numD, numE, numF));
     }
     
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
     
-    private static List<Integer> generateLottoNumber() {
+    private static List<Integer> generateLottoNumberByInput(String lottoNumbers) {
+        List<Integer> numbers = new ArrayList<>();
+        for(String number: extractWinnerLottoNumber(lottoNumbers)) {
+            numbers.add(Integer.parseInt(number));
+        }
+        return numbers;
+    }
+    
+    private static String[] extractWinnerLottoNumber(String winnerLottoNumber) {
+        return winnerLottoNumber.replace(" ", "").split(",");
+    }
+    
+    private static List<Integer> generateLottoNumberByPay() {
         return setUpLottoNumber(generateNumberList());
     }
     
