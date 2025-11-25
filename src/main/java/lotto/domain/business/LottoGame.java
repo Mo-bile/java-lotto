@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.Lottos;
-import lotto.domain.model.WinnerCount;
+import lotto.domain.model.WinningResult;
 
-public class Process {
+public class LottoGame {
     
     private final int pay;
     private final Lottos lottos;
     
-    public Process(int pay) {
+    public LottoGame(int pay) {
         this(pay, generateLottos(pay));
     }
     
-    public Process(int pay, Lottos lottos) {
+    public LottoGame(int pay, Lottos lottos) {
         validate(pay);
         this.pay = pay;
         this.lottos = lottos;
@@ -29,7 +29,7 @@ public class Process {
         return this.lottos.getLottoList();
     }
     
-    public WinnerCount showWinners(String winnerLottoNumber) {
+    public WinningResult showWinners(String winnerLottoNumber) {
         List<Integer> numbers = new ArrayList<>();
         for(String number: extractWinnerLottoNumber(winnerLottoNumber)) {
             numbers.add(Integer.parseInt(number));

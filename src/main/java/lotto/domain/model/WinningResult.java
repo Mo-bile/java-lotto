@@ -7,17 +7,17 @@ import java.math.RoundingMode;
 import java.util.Objects;
 import lotto.domain.Match;
 
-public class WinnerCount {
+public class WinningResult {
     private int threeMatch;
     private int fourMatch;
     private int fiveMatch;
     private int sixMatch;
     
-    public WinnerCount() {
+    public WinningResult() {
         this(0, 0, 0, 0);
     }
     
-    public WinnerCount(int threeMatch, int fourMatch, int fiveMatch, int sixMatch) {
+    public WinningResult(int threeMatch, int fourMatch, int fiveMatch, int sixMatch) {
         this.threeMatch = threeMatch;
         this.fourMatch = fourMatch;
         this.fiveMatch = fiveMatch;
@@ -82,8 +82,8 @@ public class WinnerCount {
         if(o == null || getClass() != o.getClass()) {
             return false;
         }
-        WinnerCount winnerCount = (WinnerCount) o;
-        return threeMatch == winnerCount.threeMatch && fourMatch == winnerCount.fourMatch && fiveMatch == winnerCount.fiveMatch && sixMatch == winnerCount.sixMatch;
+        WinningResult winningResult = (WinningResult) o;
+        return threeMatch == winningResult.threeMatch && fourMatch == winningResult.fourMatch && fiveMatch == winningResult.fiveMatch && sixMatch == winningResult.sixMatch;
     }
     
     @Override

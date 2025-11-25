@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.business.Process;
-import lotto.domain.model.WinnerCount;
+import lotto.domain.business.LottoGame;
+import lotto.domain.model.WinningResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -10,12 +10,12 @@ public class LottoApplication {
     public static void main(String[] args) {
         int pay = InputView.inputPurchaseAmount();
         
-        Process process = new Process(pay);
-        ResultView.printLottos(process.getLottos());
+        LottoGame lottoGame = new LottoGame(pay);
+        ResultView.printLottos(lottoGame.getLottos());
         
         String winningNumbers = InputView.inputWinningNumbers();
-        WinnerCount winnerCount = process.showWinners(winningNumbers);
-        String totalReturn = winnerCount.calculateTotalReturn(pay);
-        ResultView.printResult(winnerCount, totalReturn);
+        WinningResult winningResult = lottoGame.showWinners(winningNumbers);
+        String totalReturn = winningResult.calculateTotalReturn(pay);
+        ResultView.printResult(winningResult, totalReturn);
     }
 }

@@ -28,13 +28,13 @@ public class Lottos {
         return lottos;
     }
     
-    public WinnerCount findWinners(Lotto winnerLotto) {
-        WinnerCount winnerCount = new WinnerCount();
+    public WinningResult findWinners(Lotto winnerLotto) {
+        WinningResult winningResult = new WinningResult();
         for(Lotto lotto: this.lottoList) {
             Match match = Match.fromLottoNumber(lotto.findMatchNumbers(winnerLotto.getNumbers()));
-            winnerCount.increaseMatch(match);
+            winningResult.increaseMatch(match);
         }
-        return winnerCount;
+        return winningResult;
     }
     
 }
