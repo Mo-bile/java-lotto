@@ -10,12 +10,12 @@ class LottoTest {
     
     @Test
     public void 로또_6_자리를_생성한다() {
-        assertThat(new Lotto().getNumbers()).hasSize(6);
+        assertThat(new Lotto().numbers()).hasSize(6);
     }
     
     @Test
     public void 로또_6자리는_1에서45사이이다() {
-        assertThat(new Lotto().getNumbers())
+        assertThat(new Lotto().numbers())
             .allMatch(num -> num >= 1 && num <= 45);
     }
     

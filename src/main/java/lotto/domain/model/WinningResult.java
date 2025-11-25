@@ -9,10 +9,9 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import lotto.domain.Match;
 
-public class WinningResult {
+public record WinningResult(Map<Match, Integer> matchMap) {
     
     public static final int INITIAL_MATCH_COUNT = 0;
-    private final Map<Match, Integer> matchMap;
     
     public WinningResult() {
         this(initMatchMap(INITIAL_MATCH_COUNT, INITIAL_MATCH_COUNT, INITIAL_MATCH_COUNT, INITIAL_MATCH_COUNT));
@@ -20,10 +19,6 @@ public class WinningResult {
     
     public WinningResult(int threeMatchCount, int fourMatchCount, int fiveMatchCount, int sixMatchCount) {
         this(initMatchMap(threeMatchCount, fourMatchCount, fiveMatchCount, sixMatchCount));
-    }
-    
-    public WinningResult(Map<Match, Integer> matchMap) {
-        this.matchMap = matchMap;
     }
     
     private static Map<Match, Integer> initMatchMap(int threeMatchCount, int fourMatchCount, int fiveMatchCount, int sixMatchCount) {
@@ -54,13 +49,17 @@ public class WinningResult {
     }
     
     public void increaseMatch(Match match) {
-        if (match == null) return;
+        if(match == null) {
+            return;
+        }
         match.increase(this);
     }
     
     public void increaseCount(Match match) {
         this.matchMap.compute(match, (k, count) -> {
-            if(count == null) return INITIAL_MATCH_COUNT;
+            if(count == null) {
+                return INITIAL_MATCH_COUNT;
+            }
             return count + 1;
         });
     }
@@ -69,17 +68,4 @@ public class WinningResult {
         return this.matchMap.get(match);
     }
     
-    @Override
-    public boolean equals(Object o) {
-        if(o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        WinningResult that = (WinningResult) o;
-        return Objects.equals(matchMap, that.matchMap);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(matchMap);
-    }
 }

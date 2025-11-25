@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import lotto.domain.Match;
 
-public class Lotto {
+public record Lotto(List<Integer> numbers) {
     
     public static final String SPACE = " ";
     public static final String EMPTY = "";
@@ -14,7 +14,6 @@ public class Lotto {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 46;
     public static final int INITIAL_MATCH_COUNT = 0;
-    private final List<Integer> numbers;
     
     public Lotto() {
         this(generateLottoNumberByPay());
@@ -26,10 +25,6 @@ public class Lotto {
     
     public Lotto(int numA, int numB, int numC, int numD, int numE, int numF) {
         this(List.of(numA, numB, numC, numD, numE, numF));
-    }
-    
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
     }
     
     private static List<Integer> generateLottoNumberByInput(String lottoNumbers) {
@@ -63,10 +58,6 @@ public class Lotto {
         return numberList;
     }
     
-    public List<Integer> getNumbers() {
-        return this.numbers;
-    }
-    
     public Match match(Lotto winNumbers) {
         return Match.fromLottoNumber(findMatchCount(winNumbers.numbers));
     }
@@ -75,23 +66,9 @@ public class Lotto {
         int matchCount = INITIAL_MATCH_COUNT;
         for(Integer number: this.numbers) {
             if(winNumbers.contains(number)) {
-                matchCount ++;
+                matchCount++;
             }
         }
         return matchCount;
-    }
-    
-    @Override
-    public boolean equals(Object o) {
-        if(o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(numbers);
     }
 }

@@ -10,7 +10,7 @@ class LottosTest {
     @Test
     void 갯수를_입력받으면_로또를_생성한다() {
         Lottos lottos = new Lottos(10);
-        assertThat(lottos.getLottoList()).hasSize(10);
+        assertThat(lottos.lottoList()).hasSize(10);
     }
     
     @Test

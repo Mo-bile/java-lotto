@@ -1,13 +1,11 @@
 package lotto.domain.model;
 
-public class Pay {
+public record Pay(int pay) {
     
     public static final int LOTTO_PRICE = 1000;
-    private final int pay;
     
-    public Pay(int pay) {
+    public Pay {
         validate(pay);
-        this.pay = pay;
     }
     
     public int convertToBuyCount() {
