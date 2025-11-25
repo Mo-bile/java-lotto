@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import lotto.domain.Match;
 
 public class Lotto {
     
@@ -60,7 +61,11 @@ public class Lotto {
         return this.numbers;
     }
     
-    public int findMatchNumbers(List<Integer> winNumbers) {
+    public Match match(List<Integer> winNumbers) {
+        return Match.fromLottoNumber(findMatchCount(winNumbers));
+    }
+    
+    public int findMatchCount(List<Integer> winNumbers) {
         int matchCount = 0;
         for(Integer number: this.numbers) {
             if(winNumbers.contains(number)) {
