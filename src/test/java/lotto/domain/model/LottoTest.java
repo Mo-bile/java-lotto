@@ -2,7 +2,6 @@ package lotto.domain.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import lotto.domain.Match;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +36,7 @@ class LottoTest {
     public void 로또번호4개_일치하면_FOUR_MATCH가_반환된다 () {
         Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
         Match match = lotto.match(new Lotto(42, 36, 37, 43, 44, 45));
-        assertThat(match).isEqualTo(Match.FOUR_MATCH);
+        assertThat(match).isEqualTo(Match.FOURTH);
     }
     
     @Test
@@ -58,7 +57,7 @@ class LottoTest {
     public void 로또번호6개_일치하면_SIX_MATCH가_반환된다 () {
         Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
         Match match = lotto.match(new Lotto(42, 41, 40, 43, 44, 45));
-        assertThat(match).isEqualTo(Match.SIX_MATCH);
+        assertThat(match).isEqualTo(Match.FIRST);
     }
 
 }

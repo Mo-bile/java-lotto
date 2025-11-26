@@ -16,10 +16,10 @@ class LottosTest {
     @Test
     void 당첨번호를_입력받으면_당첨번호와_몇개_당첨인지_알린다() {
         Lottos lottos = new Lottos(List.of(
-            new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(40, 41, 42, 43, 44, 45))));
+            new Lotto(1, 2, 3, 4, 5, 6), new Lotto(40, 41, 42, 43, 44, 45)));
         
         WinningResult winningResult = lottos.identifyWinners(new Lotto(List.of(35, 36, 37, 43, 44, 45)));
-        WinningResult exptedwinner = new WinningResult(1, 0, 0, 0);
-        assertThat(winningResult).isEqualTo(exptedwinner);
+        WinningResult expectedWinner = new WinningResult(1, 1, 0, 0, 0, 0);
+        assertThat(winningResult).isEqualTo(expectedWinner);
     }
 }
