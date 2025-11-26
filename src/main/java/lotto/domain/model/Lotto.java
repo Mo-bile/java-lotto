@@ -59,13 +59,13 @@ public record Lotto(List<Integer> numbers) {
     }
     
     public Match match(Lotto winNumbers) {
-        return Match.fromLottoNumber(findMatchCount(winNumbers.numbers));
+        return Match.fromLottoNumber(findMatchCount(winNumbers));
     }
     
-    public int findMatchCount(List<Integer> winNumbers) {
+    public int findMatchCount(Lotto winNumbers) {
         int matchCount = INITIAL_MATCH_COUNT;
         for(Integer number: this.numbers) {
-            if(winNumbers.contains(number)) {
+            if(winNumbers.numbers.contains(number)) {
                 matchCount++;
             }
         }
