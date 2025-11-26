@@ -2,28 +2,41 @@ package lotto.domain.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
 import lotto.domain.Match;
 
 public record WinningResult(Map<Match, Integer> matchMap) {
     
-    public static final int INITIAL_MATCH_COUNT = 0;
+    public static final int INIT_COUNT = 0;
     
     public WinningResult() {
-        this(initMatchMap(INITIAL_MATCH_COUNT, INITIAL_MATCH_COUNT, INITIAL_MATCH_COUNT, INITIAL_MATCH_COUNT));
+        this(createInitMap());
     }
     
-    public WinningResult(int threeMatchCount, int fourMatchCount, int fiveMatchCount, int sixMatchCount) {
-        this(initMatchMap(threeMatchCount, fourMatchCount, fiveMatchCount, sixMatchCount));
+    public WinningResult(int... ints) {
+        this(initMatchMap(winningNumberArgsBuilder(ints)));
     }
     
-    private static Map<Match, Integer> initMatchMap(int threeMatchCount, int fourMatchCount, int fiveMatchCount, int sixMatchCount) {
+    private static Map<Match, Integer> createInitMap() {
+        Map<Match, Integer> map = new HashMap<>();
+        for (Match match : Match.values()) {
+            map.put(match, INIT_COUNT);
+        }
+        return map;
+    }
+    
+    private static List<Integer> winningNumberArgsBuilder(int[] ints) {
+        List<Integer> integerList = new ArrayList<>();
+        for(int anInt: ints) {
+            integerList.add(anInt);
+        }
+        return integerList;
+    }
+    
+    private static Map<Match, Integer> initMatchMap(List<Integer> winningNumberList) {
         Map<Match, Integer> matchMap = new HashMap<>();
-        iteratorMatchMap(matchMap, List.of(threeMatchCount, fourMatchCount, fiveMatchCount, sixMatchCount));
+        iteratorMatchMap(matchMap, winningNumberList);
         return matchMap;
     }
     
@@ -58,7 +71,7 @@ public record WinningResult(Map<Match, Integer> matchMap) {
     private void increaseCount(Match match) {
         this.matchMap.compute(match, (k, count) -> {
             if(count == null) {
-                return INITIAL_MATCH_COUNT;
+                return INIT_COUNT;
             }
             return count + 1;
         });
