@@ -20,7 +20,7 @@ public record LottoGame(Pay pay, Lottos lottos) {
         return this.lottos.lottoList();
     }
     
-    public WinningResult showWinners(String winnerLottoNumber) {
-        return this.lottos.findWinners(new Lotto(winnerLottoNumber));
+    public WinningResult displayWinners(String winnerLottoNumber) {
+        return this.lottos.identifyWinners(new Lotto(winnerLottoNumber));
     }
 }

@@ -17,7 +17,7 @@ public record Lottos(List<Lotto> lottoList) {
         return lottos;
     }
     
-    public WinningResult findWinners(Lotto winnerLotto) {
+    public WinningResult identifyWinners(Lotto winnerLotto) {
         WinningResult winningResult = new WinningResult();
         for(Lotto lotto: this.lottoList) {
             winningResult.increaseMatch(lotto.match(winnerLotto));

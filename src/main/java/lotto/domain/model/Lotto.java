@@ -3,7 +3,6 @@ package lotto.domain.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import lotto.domain.Match;
 
 public record Lotto(List<Integer> numbers) {
@@ -23,8 +22,16 @@ public record Lotto(List<Integer> numbers) {
         this(generateLottoNumberByInput(lottoNumbers));
     }
     
-    public Lotto(int numA, int numB, int numC, int numD, int numE, int numF) {
-        this(List.of(numA, numB, numC, numD, numE, numF));
+    public Lotto(int ... ints) {
+        this(lottoNumberArgsBuilder(ints));
+    }
+    
+    private static List<Integer> lottoNumberArgsBuilder(int[] ints) {
+        List<Integer> numbers = new ArrayList<>();
+        for(int anInt: ints) {
+            numbers.add(anInt);
+        }
+        return numbers;
     }
     
     private static List<Integer> generateLottoNumberByInput(String lottoNumbers) {
