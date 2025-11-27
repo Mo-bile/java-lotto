@@ -65,7 +65,7 @@ public record Lotto(List<Integer> numbers) {
         return numberList;
     }
     
-    public Rank match(Lotto winNumbers) {
+    public Rank rankDecide(Lotto winNumbers) {
         return Rank.fromLottoNumber(winNumbers.findMatchCount(this));
     }
     
@@ -77,5 +77,15 @@ public record Lotto(List<Integer> numbers) {
             }
         }
         return matchCount;
+    }
+    
+    public Rank rankDecideByBonusNumber(Bonus bonus, Rank rank) {
+        if(rank.isSecondOrThird()) {
+            if(bonus.isBonusMatch(this)) {
+                return Rank.SECOND;
+            }
+            return Rank.THIRD;
+        }
+        return rank;
     }
 }

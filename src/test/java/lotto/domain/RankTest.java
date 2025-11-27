@@ -14,9 +14,8 @@ class RankTest {
     }
     
     @Test
-    void 등수_2등과_3등중_보너스번호에_해당하면_2등으로바꾼다() {
-        assertThat(Rank.SECOND.decideSecond(new Lotto(10, 40, 41, 42, 43, 44), new Bonus(10))).isTrue();
-        assertThat(Rank.THIRD.decideSecond(new Lotto(10, 40, 41, 42, 43, 44), new Bonus(10))).isTrue();
+    void 등수_2등과_3등이_아니면_거짓이다() {
+        assertThat(Rank.FIFTH.isSecondOrThird()).isFalse();
     }
     
 }

@@ -30,14 +30,7 @@ public enum Rank {
         return winnerReturn;
     }
     
-    public boolean decideSecond(Lotto lotto, Bonus bonus) {
-        if(this.isSecondOrThird()) {
-            return bonus.isBonusMatch(lotto);
-        }
-        return false;
-    }
-    
-    private boolean isSecondOrThird() {
+    public boolean isSecondOrThird() {
         return this == THIRD || this == SECOND;
     }
     
