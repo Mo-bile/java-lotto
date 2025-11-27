@@ -2,6 +2,7 @@ package lotto.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.Rank;
 
 public record Lottos(List<Lotto> lottoList) {
     
@@ -17,10 +18,14 @@ public record Lottos(List<Lotto> lottoList) {
         return lottos;
     }
     
-    public WinningResult identifyWinners(Lotto winnerLotto) {
+    public WinningResult identifyWinners(Lotto winnerLotto, Bonus bonus) {
         WinningResult winningResult = new WinningResult();
         for(Lotto lotto: this.lottoList) {
-            winningResult.increaseMatch(lotto.match(winnerLotto));
+            Rank match = lotto.match(winnerLotto);
+            if(match.decideSecond(lotto, bonus)) {
+                match = Rank.SECOND;
+            }
+            winningResult.increaseMatch(match);
         }
         return winningResult;
     }

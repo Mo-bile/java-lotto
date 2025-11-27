@@ -66,7 +66,7 @@ public record Lotto(List<Integer> numbers) {
     }
     
     public Rank match(Lotto winNumbers) {
-        return Rank.fromMatchCount(winNumbers.findMatchCount(this));
+        return Rank.fromLottoNumber(winNumbers.findMatchCount(this));
     }
     
     public int findMatchCount(Lotto winNumbers) {

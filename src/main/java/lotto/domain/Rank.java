@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.model.Bonus;
+import lotto.domain.model.Lotto;
+
 public enum Rank {
     MISS(0, 0),
     FIFTH(3, 5_000),
@@ -16,27 +19,26 @@ public enum Rank {
         this.winnerReturn = winnerReturn;
     }
     
-    public static Rank fromMatchCount(int matchCount) {
+    public static Rank fromLottoNumber(int lottoNumber) {
         for (Rank r : values()) {
-            Rank result = getMatch(matchCount, r);
-            if(result != null) {
-                return result;
-            }
+            if (r.matchCount == lottoNumber) return r;
         }
         return null;
     }
-    
-    private static Rank getMatch(int matchCount, Rank rank) {
-        if (rank.matchCount == matchCount){
-            if(rank.matchCount == 5) {
-                return THIRD;
-            }
-            return rank;
-        }
-        return null;
-    }  
     
     public long getWinnerReturn() {
         return winnerReturn;
     }
+    
+    public boolean decideSecond(Lotto lotto, Bonus bonus) {
+        if(this.isSecondOrThird()) {
+            return bonus.isBonusMatch(lotto);
+        }
+        return false;
+    }
+    
+    private boolean isSecondOrThird() {
+        return this == THIRD || this == SECOND;
+    }
+    
 }

@@ -18,8 +18,18 @@ class LottosTest {
         Lottos lottos = new Lottos(List.of(
             new Lotto(1, 2, 3, 4, 5, 6), new Lotto(40, 41, 42, 43, 44, 45)));
         
-        WinningResult winningResult = lottos.identifyWinners(new Lotto(35, 36, 37, 43, 44, 45));
+        WinningResult winningResult = lottos.identifyWinners(new Lotto(35, 36, 37, 43, 44, 45), new Bonus(1));
         WinningResult expectedWinner = new WinningResult(1, 1, 0, 0, 0, 0);
+        assertThat(winningResult).isEqualTo(expectedWinner);
+    }
+    
+    @Test
+    void 당첨2등과_3등이면_무엇인지_알려준다() {
+        Lottos lottos = new Lottos(List.of(
+            new Lotto(10, 41, 42, 43, 44, 45), new Lotto(20, 41, 42, 43, 44, 45)));
+        
+        WinningResult winningResult = lottos.identifyWinners(new Lotto(35, 41, 42, 43, 44, 45), new Bonus(20));
+        WinningResult expectedWinner = new WinningResult(0, 0, 0, 1, 1, 0);
         assertThat(winningResult).isEqualTo(expectedWinner);
     }
 }

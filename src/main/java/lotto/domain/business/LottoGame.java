@@ -1,10 +1,7 @@
 package lotto.domain.business;
 
 import java.util.List;
-import lotto.domain.model.Lotto;
-import lotto.domain.model.Lottos;
-import lotto.domain.model.Pay;
-import lotto.domain.model.WinningResult;
+import lotto.domain.model.*;
 
 public record LottoGame(Pay pay, Lottos lottos) {
     
@@ -20,7 +17,7 @@ public record LottoGame(Pay pay, Lottos lottos) {
         return this.lottos.lottoList();
     }
     
-    public WinningResult displayWinners(String winnerLottoNumber) {
-        return this.lottos.identifyWinners(new Lotto(winnerLottoNumber));
+    public WinningResult displayWinners(String winnerLottoNumber, int bonus) {
+        return this.lottos.identifyWinners(new Lotto(winnerLottoNumber), new Bonus(bonus));
     }
 }
