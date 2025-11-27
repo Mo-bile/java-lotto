@@ -14,6 +14,11 @@ class RankTest {
     }
     
     @Test
+    void 매치가_3미만이면_MISS를_반환한다() {
+        assertThat(Rank.fromLottoNumber(1)).isEqualTo(Rank.MISS);
+    }
+    
+    @Test
     void 등수_2등과_3등이_아니면_거짓이다() {
         assertThat(Rank.FIFTH.isSecondOrThird()).isFalse();
     }

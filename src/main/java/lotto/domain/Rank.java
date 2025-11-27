@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.model.Bonus;
-import lotto.domain.model.Lotto;
-
 public enum Rank {
     MISS(0, 0),
     FIFTH(3, 5_000),
@@ -23,7 +20,7 @@ public enum Rank {
         for (Rank r : values()) {
             if (r.matchCount == lottoNumber) return r;
         }
-        return null;
+        return MISS;
     }
     
     public long getWinnerReturn() {
