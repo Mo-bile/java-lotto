@@ -20,7 +20,7 @@ public record Lottos(List<Lotto> lottoList) {
     public WinningResult identifyWinners(Lotto winnerLotto, Bonus bonusNumber) {
         WinningResult winningResult = new WinningResult();
         for(Lotto lotto: this.lottoList) {
-            winningResult.increaseMatch(lotto.rankDecideByBonusNumber(bonusNumber, lotto.rankDecide(winnerLotto)));
+            winningResult.increaseRankCount(lotto.rankDecideByBonusNumber(bonusNumber, lotto.rankDecide(winnerLotto)));
         }
         return winningResult;
     }

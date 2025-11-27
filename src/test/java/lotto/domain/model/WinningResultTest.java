@@ -34,7 +34,7 @@ class WinningResultTest {
     @Test
     void 일치하는_정보가_있으면_해당하는_일치갯수1을_증가시킨다() {
         WinningResult winningResult = new WinningResult();
-        winningResult.increaseMatch(Rank.fromLottoNumber(5));
+        winningResult.increaseRankCount(Rank.fromLottoNumber(5));
         assertThat(winningResult).isEqualTo(new WinningResult(0, 0, 0, 1, 0, 0));
     }
     

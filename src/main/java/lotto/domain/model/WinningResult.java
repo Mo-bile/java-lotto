@@ -61,14 +61,7 @@ public record WinningResult(Map<Rank, Integer> matchMap) {
         return profit;
     }
     
-    public void increaseMatch(Rank rank) {
-        if(rank == null) {
-            return;
-        }
-        this.increaseCount(rank);
-    }
-    
-    private void increaseCount(Rank rank) {
+    public void increaseRankCount(Rank rank) {
         this.matchMap.compute(rank, (k, count) -> {
             if(count == null) {
                 return INIT_COUNT;
