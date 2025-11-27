@@ -18,7 +18,7 @@ class LottosTest {
         Lottos lottos = new Lottos(List.of(
             new Lotto(1, 2, 3, 4, 5, 6), new Lotto(40, 41, 42, 43, 44, 45)));
         
-        WinningResult winningResult = lottos.identifyWinners(new Lotto(List.of(35, 36, 37, 43, 44, 45)));
+        WinningResult winningResult = lottos.identifyWinners(new Lotto(35, 36, 37, 43, 44, 45));
         WinningResult expectedWinner = new WinningResult(1, 1, 0, 0, 0, 0);
         assertThat(winningResult).isEqualTo(expectedWinner);
     }
