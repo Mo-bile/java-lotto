@@ -8,30 +8,30 @@ public enum Rank {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
     
-    private final int matchNumber;
+    private final int matchCount;
     private final long winnerReturn;
     
-    Rank(int matchNumber, long winnerReturn) {
-        this.matchNumber = matchNumber;
+    Rank(int matchCount, long winnerReturn) {
+        this.matchCount = matchCount;
         this.winnerReturn = winnerReturn;
     }
     
-    public static Rank fromLottoNumber(int lottoNumber) {
-        for (Rank m : values()) {
-            Rank third = getMatch(lottoNumber, m);
-            if(third != null) {
-                return third;
+    public static Rank fromMatchCount(int matchCount) {
+        for (Rank r : values()) {
+            Rank result = getMatch(matchCount, r);
+            if(result != null) {
+                return result;
             }
         }
         return null;
     }
     
-    private static Rank getMatch(int lottoNumber, Rank m) {
-        if (m.matchNumber == lottoNumber){
-            if(m.matchNumber == 5) {
+    private static Rank getMatch(int matchCount, Rank rank) {
+        if (rank.matchCount == matchCount){
+            if(rank.matchCount == 5) {
                 return THIRD;
             }
-            return m;
+            return rank;
         }
         return null;
     }  
