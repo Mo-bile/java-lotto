@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public enum Match {
+public enum Rank {
     MISS(0, 0),
     FIFTH(3, 5_000),
     FOURTH(4, 5_0000),
@@ -11,14 +11,14 @@ public enum Match {
     private final int matchNumber;
     private final long winnerReturn;
     
-    Match(int matchNumber, long winnerReturn) {
+    Rank(int matchNumber, long winnerReturn) {
         this.matchNumber = matchNumber;
         this.winnerReturn = winnerReturn;
     }
     
-    public static Match fromLottoNumber(int lottoNumber) {
-        for (Match m : values()) {
-            Match third = getMatch(lottoNumber, m);
+    public static Rank fromLottoNumber(int lottoNumber) {
+        for (Rank m : values()) {
+            Rank third = getMatch(lottoNumber, m);
             if(third != null) {
                 return third;
             }
@@ -26,7 +26,7 @@ public enum Match {
         return null;
     }
     
-    private static Match getMatch(int lottoNumber, Match m) {
+    private static Rank getMatch(int lottoNumber, Rank m) {
         if (m.matchNumber == lottoNumber){
             if(m.matchNumber == 5) {
                 return THIRD;

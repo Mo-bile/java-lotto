@@ -3,7 +3,7 @@ package lotto.domain.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.Match;
+import lotto.domain.Rank;
 
 public record Lotto(List<Integer> numbers) {
     
@@ -65,8 +65,8 @@ public record Lotto(List<Integer> numbers) {
         return numberList;
     }
     
-    public Match match(Lotto winNumbers) {
-        return Match.fromLottoNumber(winNumbers.findMatchCount(this));
+    public Rank match(Lotto winNumbers) {
+        return Rank.fromLottoNumber(winNumbers.findMatchCount(this));
     }
     
     public int findMatchCount(Lotto winNumbers) {

@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 import java.util.Map.Entry;
-import lotto.domain.Match;
+import lotto.domain.Rank;
 
-public record WinningResult(Map<Match, Integer> matchMap) {
+public record WinningResult(Map<Rank, Integer> matchMap) {
     
     public static final int INIT_COUNT = 0;
     
@@ -18,10 +18,10 @@ public record WinningResult(Map<Match, Integer> matchMap) {
         this(initMatchMap(winningNumberArgsBuilder(ints)));
     }
     
-    private static Map<Match, Integer> createInitMap() {
-        Map<Match, Integer> map = new HashMap<>();
-        for (Match match : Match.values()) {
-            map.put(match, INIT_COUNT);
+    private static Map<Rank, Integer> createInitMap() {
+        Map<Rank, Integer> map = new HashMap<>();
+        for (Rank rank: Rank.values()) {
+            map.put(rank, INIT_COUNT);
         }
         return map;
     }
@@ -34,15 +34,15 @@ public record WinningResult(Map<Match, Integer> matchMap) {
         return integerList;
     }
     
-    private static Map<Match, Integer> initMatchMap(List<Integer> winningNumberList) {
-        Map<Match, Integer> matchMap = new HashMap<>();
+    private static Map<Rank, Integer> initMatchMap(List<Integer> winningNumberList) {
+        Map<Rank, Integer> matchMap = new HashMap<>();
         iteratorMatchMap(matchMap, winningNumberList);
         return matchMap;
     }
     
-    private static void iteratorMatchMap(Map<Match, Integer> matchMap, List<Integer> count) {
-        for(int i = 0; i < Match.values().length; i++) {
-            matchMap.put(Match.values()[i], count.get(i));
+    private static void iteratorMatchMap(Map<Rank, Integer> matchMap, List<Integer> count) {
+        for(int i = 0; i < Rank.values().length; i++) {
+            matchMap.put(Rank.values()[i], count.get(i));
         }
     }
     
@@ -55,21 +55,21 @@ public record WinningResult(Map<Match, Integer> matchMap) {
     
     private BigDecimal getProfit() {
         BigDecimal profit = BigDecimal.ZERO;
-        for(Entry<Match, Integer> matchIntegerEntry: matchMap.entrySet()) {
+        for(Entry<Rank, Integer> matchIntegerEntry: matchMap.entrySet()) {
             profit = profit.add(BigDecimal.valueOf(matchIntegerEntry.getValue()).multiply(BigDecimal.valueOf(matchIntegerEntry.getKey().getWinnerReturn())));
         }
         return profit;
     }
     
-    public void increaseMatch(Match match) {
-        if(match == null) {
+    public void increaseMatch(Rank rank) {
+        if(rank == null) {
             return;
         }
-        this.increaseCount(match);
+        this.increaseCount(rank);
     }
     
-    private void increaseCount(Match match) {
-        this.matchMap.compute(match, (k, count) -> {
+    private void increaseCount(Rank rank) {
+        this.matchMap.compute(rank, (k, count) -> {
             if(count == null) {
                 return INIT_COUNT;
             }
@@ -77,8 +77,8 @@ public record WinningResult(Map<Match, Integer> matchMap) {
         });
     }
     
-    public int getMatchCount(Match match) {
-        return this.matchMap.get(match);
+    public int getMatchCount(Rank rank) {
+        return this.matchMap.get(rank);
     }
     
 }
