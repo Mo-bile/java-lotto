@@ -14,28 +14,12 @@ public record WinningResult(Map<Rank, Integer> winningRankCounts) {
         this(createInitMap());
     }
     
-    public WinningResult(int... ints) {
-        this(initMatchMap(Arrays.stream(ints).boxed().toList()));
-    }
-    
     private static Map<Rank, Integer> createInitMap() {
         Map<Rank, Integer> map = new HashMap<>();
         for (Rank rank: Rank.values()) {
             map.put(rank, INIT_COUNT);
         }
         return map;
-    }
-    
-    private static Map<Rank, Integer> initMatchMap(List<Integer> winningNumberList) {
-        Map<Rank, Integer> matchMap = new HashMap<>();
-        iteratorMatchMap(matchMap, winningNumberList);
-        return matchMap;
-    }
-    
-    private static void iteratorMatchMap(Map<Rank, Integer> matchMap, List<Integer> count) {
-        for(int i = 0; i < Rank.values().length; i++) {
-            matchMap.put(Rank.values()[i], count.get(i));
-        }
     }
     
     public String calculateTotalReturn(int pay) {
