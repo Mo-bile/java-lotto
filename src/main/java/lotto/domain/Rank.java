@@ -31,4 +31,7 @@ public enum Rank {
         return this == THIRD || this == SECOND;
     }
     
+    public int getMatchCount() {
+        return matchCount;
+    }
 }
