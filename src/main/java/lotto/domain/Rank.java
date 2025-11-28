@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.model.Bonus;
+import lotto.domain.model.Lotto;
+
 public enum Rank {
     MISS(0, 0),
     FIFTH(3, 5_000),
@@ -27,11 +30,17 @@ public enum Rank {
         return winnerReturn;
     }
     
-    public boolean isSecondOrThird() {
-        return this == THIRD || this == SECOND;
+    public Rank rankDecideByBonusNumber(Lotto lotto, Bonus bonus) {
+        if(this.isSecondOrThird()) {
+            if(lotto.isContain(bonus)) {
+                return SECOND;
+            }
+            return THIRD;
+        }
+        return this;
     }
     
-    public int getMatchCount() {
-        return matchCount;
+    private boolean isSecondOrThird() {
+        return this == THIRD || this == SECOND;
     }
 }

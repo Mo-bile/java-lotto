@@ -79,17 +79,7 @@ public record Lotto(List<Integer> numbers) {
         return matchCount;
     }
     
-    public Rank rankDecideByBonusNumber(Bonus bonus, Rank rank) {
-        if(rank.isSecondOrThird()) {
-            if(this.isContain(bonus)) {
-                return Rank.SECOND;
-            }
-            return Rank.THIRD;
-        }
-        return rank;
-    }
-    
-    private boolean isContain(Bonus bonus) {
+    public boolean isContain(Bonus bonus) {
         for(Integer number: this.numbers) {
             if(bonus.isSameNumber(number)) {
                 return true;
