@@ -17,7 +17,7 @@ public record LottoGame(Pay pay, Lottos lottos) {
         return this.lottos.lottoList();
     }
     
-    public WinningResult displayWinners(String winnerLottoNumber, int bonus) {
+    public WinningResult calculateWinningResult(String winnerLottoNumber, int bonus) {
         return this.lottos.identifyWinners(new Lotto(winnerLottoNumber), new Bonus(bonus));
     }
 }

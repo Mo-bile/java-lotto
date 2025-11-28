@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import lotto.domain.Rank;
 
-public record WinningResult(Map<Rank, Integer> matchMap) {
+public record WinningResult(Map<Rank, Integer> winningRankCounts) {
     
     public static final int INIT_COUNT = 0;
     
@@ -47,14 +47,14 @@ public record WinningResult(Map<Rank, Integer> matchMap) {
     
     private BigDecimal getProfit() {
         BigDecimal profit = BigDecimal.ZERO;
-        for(Entry<Rank, Integer> matchIntegerEntry: matchMap.entrySet()) {
+        for(Entry<Rank, Integer> matchIntegerEntry: winningRankCounts.entrySet()) {
             profit = profit.add(BigDecimal.valueOf(matchIntegerEntry.getValue()).multiply(BigDecimal.valueOf(matchIntegerEntry.getKey().getWinnerReturn())));
         }
         return profit;
     }
     
-    public void increaseRankCount(Rank rank) {
-        this.matchMap.compute(rank, (k, count) -> {
+    public void recordRank(Rank rank) {
+        this.winningRankCounts.compute(rank, (k, count) -> {
             if(count == null) {
                 return INIT_COUNT;
             }
@@ -63,7 +63,7 @@ public record WinningResult(Map<Rank, Integer> matchMap) {
     }
     
     public int getMatchCount(Rank rank) {
-        return this.matchMap.get(rank);
+        return this.winningRankCounts.get(rank);
     }
     
 }

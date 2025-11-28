@@ -19,9 +19,9 @@ public enum Rank {
         this.winnerReturn = winnerReturn;
     }
     
-    public static Rank fromLottoNumber(int lottoNumber) {
+    public static Rank fromLottoNumber(int matchCount) {
         for (Rank r : values()) {
-            if (r.matchCount == lottoNumber) return r;
+            if (r.matchCount == matchCount) return r;
         }
         return MISS;
     }

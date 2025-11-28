@@ -15,7 +15,7 @@ public class LottoApplication {
         
         String winningNumbers = InputView.inputWinningNumbers();
         int bonusNumbers = InputView.inputBonusNumbers();
-        WinningResult winningResult = lottoGame.displayWinners(winningNumbers, bonusNumbers);
+        WinningResult winningResult = lottoGame.calculateWinningResult(winningNumbers, bonusNumbers);
         String totalReturn = winningResult.calculateTotalReturn(pay);
         ResultView.printResult(winningResult, totalReturn);
     }
