@@ -15,7 +15,7 @@ public record WinningResult(Map<Rank, Integer> matchMap) {
     }
     
     public WinningResult(int... ints) {
-        this(initMatchMap(winningNumberArgsBuilder(ints)));
+        this(initMatchMap(Arrays.stream(ints).boxed().toList()));
     }
     
     private static Map<Rank, Integer> createInitMap() {
@@ -24,14 +24,6 @@ public record WinningResult(Map<Rank, Integer> matchMap) {
             map.put(rank, INIT_COUNT);
         }
         return map;
-    }
-    
-    private static List<Integer> winningNumberArgsBuilder(int[] ints) {
-        List<Integer> integerList = new ArrayList<>();
-        for(int anInt: ints) {
-            integerList.add(anInt);
-        }
-        return integerList;
     }
     
     private static Map<Rank, Integer> initMatchMap(List<Integer> winningNumberList) {

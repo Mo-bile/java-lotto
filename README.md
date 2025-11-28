@@ -106,4 +106,4 @@
 - [x] : findMatchCount 접근제어자 private 로 변경하면서 테스트 제거
 - [x] : `rankDecideByBonusNumber` 메서드의 주체 변경
   - 이유 : 메서드 시그니쳐가 모두 Rank 가 있는데,,, 이정도면 충분히 Rank 에게 주어야하는 역할임
-- [ ] : 
+- [x] : Array 를 List 로 변경(Ai 검색 도움)

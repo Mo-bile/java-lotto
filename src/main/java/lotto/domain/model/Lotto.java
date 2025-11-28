@@ -1,6 +1,7 @@
 package lotto.domain.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.Rank;
@@ -23,15 +24,7 @@ public record Lotto(List<Integer> numbers) {
     }
     
     public Lotto(int ... ints) {
-        this(lottoNumberArgsBuilder(ints));
-    }
-    
-    private static List<Integer> lottoNumberArgsBuilder(int[] ints) {
-        List<Integer> numbers = new ArrayList<>();
-        for(int anInt: ints) {
-            numbers.add(anInt);
-        }
-        return numbers;
+        this(Arrays.stream(ints).boxed().toList());
     }
     
     private static List<Integer> generateLottoNumberByInput(String lottoNumbers) {
