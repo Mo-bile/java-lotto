@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.domain.model.Bonus;
+import lotto.domain.model.LottoNumber;
 import lotto.domain.model.Lotto;
 import org.junit.jupiter.api.Test;
 
@@ -20,12 +20,12 @@ class RankTest {
     
     @Test
     public void 랭크3등인데_보너스_번호를_맞아서_2등을_결정한다() {
-        assertThat(Rank.THIRD.rankDecideByBonusNumber(new Lotto(40, 41, 42, 43, 44, 45), new Bonus(40))).isEqualTo(Rank.SECOND);
+        assertThat(Rank.THIRD.rankDecideByBonusNumber(new Lotto(40, 41, 42, 43, 44, 45), new LottoNumber(40))).isEqualTo(Rank.SECOND);
     }
     
     @Test
     public void 랭크2등인데_보너스_번호가_틀려서_3등을_결정한다() {
-        assertThat(Rank.SECOND.rankDecideByBonusNumber(new Lotto(40, 41, 42, 43, 44, 45), new Bonus(39))).isEqualTo(Rank.THIRD);
+        assertThat(Rank.SECOND.rankDecideByBonusNumber(new Lotto(40, 41, 42, 43, 44, 45), new LottoNumber(39))).isEqualTo(Rank.THIRD);
     }
     
 }

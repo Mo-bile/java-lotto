@@ -18,6 +18,6 @@ public record LottoGame(Pay pay, Lottos lottos) {
     }
     
     public WinningResult calculateWinningResult(String winnerLottoNumber, int bonus) {
-        return this.lottos.identifyWinners(new Lotto(winnerLottoNumber), new Bonus(bonus));
+        return this.lottos.identifyWinners(new Lotto(winnerLottoNumber), new LottoNumber(bonus));
     }
 }

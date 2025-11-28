@@ -17,7 +17,7 @@ public record Lottos(List<Lotto> lottoList) {
         return lottos;
     }
     
-    public WinningResult identifyWinners(Lotto winnerLotto, Bonus bonusNumber) {
+    public WinningResult identifyWinners(Lotto winnerLotto, LottoNumber bonusNumber) {
         WinningResult winningResult = new WinningResult();
         for(Lotto lotto: this.lottoList) {
             winningResult.recordRank(lotto.rankDecide(winnerLotto).rankDecideByBonusNumber(lotto , bonusNumber));

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.model.Bonus;
+import lotto.domain.model.LottoNumber;
 import lotto.domain.model.Lotto;
 
 public enum Rank {
@@ -30,7 +30,7 @@ public enum Rank {
         return winnerReturn;
     }
     
-    public Rank rankDecideByBonusNumber(Lotto lotto, Bonus bonus) {
+    public Rank rankDecideByBonusNumber(Lotto lotto, LottoNumber bonus) {
         if(this.isSecondOrThird()) {
             if(lotto.isContain(bonus)) {
                 return SECOND;
