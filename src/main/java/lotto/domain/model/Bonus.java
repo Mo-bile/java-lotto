@@ -2,11 +2,7 @@ package lotto.domain.model;
 
 public class Bonus {
     
-    int bonusNumber;
-    
-    public Bonus() {
-        this(0);
-    }
+    private final int bonusNumber;
     
     public Bonus(int bonusNumber) {
         validate(bonusNumber);
