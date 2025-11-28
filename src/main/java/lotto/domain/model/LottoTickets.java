@@ -3,9 +3,9 @@ package lotto.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public record Lottos(List<Lotto> lottoList) {
+public record LottoTickets(List<Lotto> tickets) {
     
-    public Lottos(int num) {
+    public LottoTickets(int num) {
         this(generateLottos(num));
     }
     
@@ -19,7 +19,7 @@ public record Lottos(List<Lotto> lottoList) {
     
     public WinningResult identifyWinners(Lotto winnerLotto, LottoNumber bonusNumber) {
         WinningResult winningResult = new WinningResult();
-        for(Lotto lotto: this.lottoList) {
+        for(Lotto lotto: this.tickets) {
             winningResult.recordRank(lotto.rankDecide(winnerLotto).rankDecideByBonusNumber(lotto , bonusNumber));
         }
         return winningResult;

@@ -3,21 +3,21 @@ package lotto.domain.business;
 import java.util.List;
 import lotto.domain.model.*;
 
-public record LottoGame(Pay pay, Lottos lottos) {
+public record LottoGame(Pay pay, LottoTickets lottoTickets) {
     
     public LottoGame(int pay) {
         this(new Pay(pay), generateLottos(new Pay(pay)));
     }
     
-    private static Lottos generateLottos(Pay pay) {
-        return new Lottos(pay.convertToBuyCount());
+    private static LottoTickets generateLottos(Pay pay) {
+        return new LottoTickets(pay.convertToBuyCount());
     }
     
     public List<Lotto> getLottos() {
-        return this.lottos.lottoList();
+        return this.lottoTickets.tickets();
     }
     
     public WinningResult calculateWinningResult(String winnerLottoNumber, int bonus) {
-        return this.lottos.identifyWinners(new Lotto(winnerLottoNumber), new LottoNumber(bonus));
+        return this.lottoTickets.identifyWinners(new Lotto(winnerLottoNumber), new LottoNumber(bonus));
     }
 }

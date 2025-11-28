@@ -1,13 +1,13 @@
 package lotto.domain.model;
 
-public record LottoNumber(int lottoNumber) {
+public record LottoNumber(int value) {
     
     public LottoNumber {
-        validate(lottoNumber);
+        validate(value);
     }
     
     public boolean isSameNumber(Integer number) {
-        return number == this.lottoNumber;
+        return number == this.value;
     }
     
     private void validate(int bonusNumber) {

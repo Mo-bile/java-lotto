@@ -84,7 +84,7 @@ public record Lotto(List<LottoNumber> numbers) {
     
     public boolean isContain(LottoNumber lottoNumber) {
         for(LottoNumber number: this.numbers) {
-            if(lottoNumber.isSameNumber(number.lottoNumber())) {
+            if(lottoNumber.isSameNumber(number.value())) {
                 return true;
             }
         }
