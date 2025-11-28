@@ -19,38 +19,10 @@ class LottoTest {
     }
     
     @Test
-    public void 인자로들어온_로또번호가_3개_일치한다() {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        assertThat(lotto.findMatchCount(new Lotto(35, 36, 37, 43, 44, 45)))
-            .isEqualTo(Rank.FIFTH.getMatchCount());
-    }
-    
-    @Test
-    public void 인자로들어온_로또번호가_4개_일치한다() {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        assertThat(lotto.findMatchCount(new Lotto(42, 36, 37, 43, 44, 45)))
-            .isEqualTo(Rank.FOURTH.getMatchCount());
-    }
-    
-    @Test
     public void 로또번호4개_일치하면_FOUR_MATCH가_반환된다 () {
         Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
         Rank rank = lotto.rankDecide(new Lotto(42, 36, 37, 43, 44, 45));
         assertThat(rank).isEqualTo(Rank.FOURTH);
-    }
-    
-    @Test
-    public void 인자로들어온_로또번호가_5개_일치한다() {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        assertThat(lotto.findMatchCount(new Lotto(42, 41, 37, 43, 44, 45)))
-            .isEqualTo(Rank.SECOND.getMatchCount());
-    }
-    
-    @Test
-    public void 인자로들어온_로또번호가_6개_일치한다() {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        assertThat(lotto.findMatchCount(new Lotto(42, 41, 40, 43, 44, 45)))
-            .isEqualTo(Rank.FIRST.getMatchCount());
     }
     
     @Test
@@ -71,4 +43,5 @@ class LottoTest {
         Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
         assertThat(lotto.rankDecideByBonusNumber(new Bonus(39), Rank.SECOND)).isEqualTo(Rank.THIRD);
     }
+    
 }

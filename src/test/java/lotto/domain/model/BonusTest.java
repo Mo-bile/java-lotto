@@ -9,11 +9,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class BonusTest {
     
-    @Test
-    void Bonus와_일치한다() {
-        Bonus bonus = new Bonus(45);
-        assertThat(bonus.isBonusMatch(new Lotto(40, 41, 42, 43, 44, 45))).isTrue();
-    }
     
     @ParameterizedTest
     @ValueSource(ints = {0,46})

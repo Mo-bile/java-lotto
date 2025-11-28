@@ -9,16 +9,7 @@ public class Bonus {
         this.bonusNumber = bonusNumber;
     }
     
-    public boolean isBonusMatch(Lotto lottoNumbers) {
-        for(Integer number: lottoNumbers.numbers()) {
-            if(isSameNumber(number)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    private boolean isSameNumber(Integer number) {
+    public boolean isSameNumber(Integer number) {
         return number == this.bonusNumber;
     }
     

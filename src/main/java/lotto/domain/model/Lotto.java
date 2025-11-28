@@ -69,7 +69,7 @@ public record Lotto(List<Integer> numbers) {
         return Rank.fromLottoNumber(winNumbers.findMatchCount(this));
     }
     
-    public int findMatchCount(Lotto winNumbers) {
+    private int findMatchCount(Lotto winNumbers) {
         int matchCount = INITIAL_MATCH_COUNT;
         for(Integer number: this.numbers) {
             if(winNumbers.numbers.contains(number)) {
@@ -81,11 +81,20 @@ public record Lotto(List<Integer> numbers) {
     
     public Rank rankDecideByBonusNumber(Bonus bonus, Rank rank) {
         if(rank.isSecondOrThird()) {
-            if(bonus.isBonusMatch(this)) {
+            if(this.isContain(bonus)) {
                 return Rank.SECOND;
             }
             return Rank.THIRD;
         }
         return rank;
+    }
+    
+    private boolean isContain(Bonus bonus) {
+        for(Integer number: this.numbers) {
+            if(bonus.isSameNumber(number)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
