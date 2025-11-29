@@ -20,8 +20,8 @@ public record WinningLotto(Lotto winNumbers, LottoNumber bonusNumber) {
         this(new Lotto(winNumbers), new LottoNumber(bonusNumber));
     }
     
-    public WinningLotto(Lotto WinNumbers) {
-        this(WinNumbers, new LottoNumber(1));
+    public WinningLotto(Lotto winNumbers) {
+        this(winNumbers, new LottoNumber(1));
     }
     
     public WinningLotto {
@@ -35,16 +35,7 @@ public record WinningLotto(Lotto winNumbers, LottoNumber bonusNumber) {
     }
     
     public Rank rankDecide(Lotto lotto) {
-        return calculateWinningRank(lotto.findMatchCount(winNumbers), lotto.isContain(bonusNumber));
+        return Rank.valueOf(lotto.findMatchCount(winNumbers), lotto.isContain(bonusNumber));
     }
     
-    public Rank calculateWinningRank(int matchCount, boolean bonusMatch) {
-        if(Rank.isSecondOrThird(matchCount)) {
-            if(bonusMatch) {
-                return Rank.SECOND;
-            }
-            return Rank.THIRD;
-        }
-        return Rank.getRank(matchCount);
-    }
 }

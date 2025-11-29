@@ -40,7 +40,7 @@ class WinningResultTest {
     @Test
     void 일치하는_정보가_있으면_해당하는_일치갯수1을_증가시킨다() {
         WinningResult winningResult = new WinningResult();
-        winningResult.recordRank(Rank.getRank(5));
+        winningResult.recordRank(Rank.valueOf(5, false));
         
         WinningResult expectedResult = new WinningResult();
         expectedResult.recordRank(Rank.THIRD);
