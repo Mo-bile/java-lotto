@@ -2,7 +2,6 @@ package lotto.domain.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 

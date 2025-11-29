@@ -69,7 +69,7 @@ public record Lotto(List<LottoNumber> numbers) {
             .map(LottoNumber::value)
             .toList();
     }
-
+    
     public int findMatchCount(Lotto winNumbers) {
         return (int) this.numbers.stream()
             .filter(winNumbers::isContain)
