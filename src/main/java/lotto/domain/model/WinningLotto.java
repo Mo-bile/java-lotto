@@ -2,26 +2,26 @@ package lotto.domain.model;
 
 import lotto.domain.Rank;
 
-public record WinningLotto(Lotto winNumbers, LottoNumber bonusNumber) {
+public record WinningLotto(LottoNumber bonusNumber, Lotto winNumbers) {
     
     public WinningLotto(int bonusNumber, int... winNumbers) {
-        this(new Lotto(winNumbers), new LottoNumber(bonusNumber));
+        this(new LottoNumber(bonusNumber), new Lotto(winNumbers));
     }
     
     public WinningLotto(String bonusNumber, int... winNumbers) {
-        this(new Lotto(winNumbers), new LottoNumber(bonusNumber));
+        this(new LottoNumber(bonusNumber), new Lotto(winNumbers));
     }
     
-    public WinningLotto(String winNumbers, String bonusNumber) {
-        this(new Lotto(winNumbers), new LottoNumber(bonusNumber));
+    public WinningLotto(String bonusNumber, String winNumbers) {
+        this(new LottoNumber(bonusNumber), new Lotto(winNumbers));
     }
     
-    public WinningLotto(String winNumbers, int bonusNumber) {
-        this(new Lotto(winNumbers), new LottoNumber(bonusNumber));
+    public WinningLotto(int bonusNumber, String winNumbers) {
+        this(new LottoNumber(bonusNumber), new Lotto(winNumbers));
     }
     
     public WinningLotto(Lotto winNumbers) {
-        this(winNumbers, new LottoNumber(1));
+        this(new LottoNumber(1), winNumbers);
     }
     
     public WinningLotto {

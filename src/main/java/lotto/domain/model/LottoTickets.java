@@ -1,9 +1,14 @@
 package lotto.domain.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public record LottoTickets(List<Lotto> tickets) {
+    
+    public LottoTickets(Lotto... lottos) {
+        this(generateLottos(lottos));
+    }
     
     public LottoTickets(int num) {
         this(generateLottos(num));
@@ -15,6 +20,10 @@ public record LottoTickets(List<Lotto> tickets) {
             lottos.add(new Lotto());
         }
         return lottos;
+    }
+    
+    private static List<Lotto> generateLottos(Lotto... lottos) {
+        return Arrays.asList(lottos);
     }
     
     public WinningResult identifyWinners(WinningLotto winningLotto) {
