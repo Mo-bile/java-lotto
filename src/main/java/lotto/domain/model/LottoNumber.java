@@ -10,8 +10,8 @@ public record LottoNumber(int value) {
         validate(value);
     }
     
-    private void validate(int bonusNumber) {
-        if(bonusNumber < 1 || bonusNumber > 45) {
+    private void validate(int value) {
+        if(value < 1 || value > 45) {
             throw new IllegalArgumentException("보너스 번호는 1~45사이 입력하시오");
         }
     }
