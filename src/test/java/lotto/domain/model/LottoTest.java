@@ -24,19 +24,4 @@ class LottoTest {
             .hasMessage("보너스 번호는 1~45사이 입력하시오");
     }
     
-    @Test
-    public void 로또번호4개_일치하면_FOUR_MATCH가_반환된다() {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        Rank rank = lotto.rankDecide(new WinningLotto(new Lotto(42, 36, 37, 43, 44, 45), new LottoNumber(20)));
-        assertThat(rank).isEqualTo(Rank.FOURTH);
-    }
-    
-    @Test
-    public void 로또번호6개_일치하면_SIX_MATCH가_반환된다() {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        Rank rank = lotto.rankDecide(new WinningLotto(new Lotto(42, 41, 40, 43, 44, 45), new LottoNumber(20)));
-        assertThat(rank).isEqualTo(Rank.FIRST);
-    }
-    
-    
 }

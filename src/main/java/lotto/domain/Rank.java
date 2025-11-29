@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import lotto.domain.model.Lotto;
-import lotto.domain.model.LottoNumber;
 
 public enum Rank {
     MISS(0, 0),
@@ -20,19 +18,15 @@ public enum Rank {
         this.winnerReturn = winnerReturn;
     }
     
-    public static Rank fromLottoNumber(int matchCount, boolean bonusMatch) {
-        if(matchCount == 5) {
-            if(bonusMatch) {
-                return SECOND;
-            }
-            return THIRD;
-        }
-        for(Rank r: values()) {
-            if(r.matchCount == matchCount) {
-                return r;
-            }
-        }
-        return MISS;
+    public static Rank getRank(int matchCount) {
+        return Arrays.stream(values())
+            .filter(rank -> rank.matchCount == matchCount)
+            .findFirst()
+            .orElse(MISS);
+    }
+    
+    public static boolean isSecondOrThird(int matchCount) {
+        return SECOND.matchCount == matchCount || THIRD.matchCount == matchCount;
     }
     
     public long getWinnerReturn() {

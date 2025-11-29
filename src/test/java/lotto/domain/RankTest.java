@@ -2,20 +2,23 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.domain.model.LottoNumber;
-import lotto.domain.model.Lotto;
 import org.junit.jupiter.api.Test;
 
 class RankTest {
     
     @Test
-    void 매치된_숫자5를_제시하면_다섯개_일치를_반환한다() {
-        assertThat(Rank.fromLottoNumber(5, false)).isEqualTo(Rank.THIRD);
+    void 매치4에_해당하면_FOURTH를_준다() {
+        assertThat(Rank.getRank(4)).isEqualTo(Rank.FOURTH);
     }
     
     @Test
-    void 매치가_3미만이면_MISS를_반환한다() {
-        assertThat(Rank.fromLottoNumber(1, false)).isEqualTo(Rank.MISS);
+    void 매치2에_해당하면_miss를_준다() {
+        assertThat(Rank.getRank(2)).isEqualTo(Rank.MISS);
+    }
+    
+    @Test
+    void 매치5에_해당하면_참이다() {
+        assertThat(Rank.isSecondOrThird(5)).isTrue();
     }
     
 }
