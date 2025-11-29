@@ -2,12 +2,12 @@ package lotto.domain.model;
 
 public record LottoNumber(int value) {
     
-    public LottoNumber {
-        validate(value);
+    public LottoNumber(String value) {
+        this(Integer.parseInt(value));
     }
     
-    public boolean isSameNumber(Integer number) {
-        return number == this.value;
+    public LottoNumber {
+        validate(value);
     }
     
     private void validate(int bonusNumber) {

@@ -11,7 +11,7 @@ public class ResultView {
         System.out.println(lottoList.size() + "개를 구매했습니다.");
         
         for(Lotto lotto: lottoList) {
-            System.out.println(lotto.numbers());
+            System.out.println(lotto.numberValues());
         }
     }
     

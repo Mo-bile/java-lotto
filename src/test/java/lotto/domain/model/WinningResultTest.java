@@ -11,14 +11,14 @@ class WinningResultTest {
     void 수익과_3개_일치_갯수로_수익률을_계산한다_() {
         WinningResult winningResult = new WinningResult();
         winningResult.recordRank(Rank.FIFTH);
-        assertThat(winningResult.calculateTotalReturn(14000)).isEqualTo("0.35");
+        assertThat(winningResult.calculateTotalReturn(14_000)).isEqualTo("0.35");
     }
     
     @Test
     void 수익과_4개_일치_갯수로_수익률을_계산한다() {
         WinningResult winningResult = new WinningResult();
         winningResult.recordRank(Rank.FOURTH);
-        assertThat(winningResult.calculateTotalReturn(14000)).isEqualTo("3.57");
+        assertThat(winningResult.calculateTotalReturn(14_000)).isEqualTo("3.57");
     }
     
     @Test
@@ -26,7 +26,7 @@ class WinningResultTest {
         WinningResult winningResult = new WinningResult();
         winningResult.recordRank(Rank.FIFTH);
         winningResult.recordRank(Rank.FOURTH);
-        assertThat(winningResult.calculateTotalReturn(14000)).isEqualTo("3.92");
+        assertThat(winningResult.calculateTotalReturn(14_000)).isEqualTo("3.92");
     }
     
     @Test
@@ -34,7 +34,7 @@ class WinningResultTest {
         WinningResult winningResult = new WinningResult();
         winningResult.recordRank(Rank.FIFTH);
         winningResult.recordRank(Rank.FIRST);
-        assertThat(winningResult.calculateTotalReturn(200000)).isEqualTo("10000.02");
+        assertThat(winningResult.calculateTotalReturn(200_000)).isEqualTo("10000.02");
     }
     
     @Test

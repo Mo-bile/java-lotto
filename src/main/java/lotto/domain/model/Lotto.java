@@ -34,7 +34,7 @@ public record Lotto(List<LottoNumber> numbers) {
     private static List<LottoNumber> generateLottoNumberByInput(String lottoNumbers) {
         List<LottoNumber> numbers = new ArrayList<>();
         for(String number: extractWinnerLottoNumber(lottoNumbers)) {
-            numbers.add(new LottoNumber(Integer.parseInt(number)));
+            numbers.add(new LottoNumber(number));
         }
         return numbers;
     }
@@ -68,6 +68,12 @@ public record Lotto(List<LottoNumber> numbers) {
         return numberList;
     }
     
+    public List<Integer> numberValues() {
+        return this.numbers.stream()
+            .map(LottoNumber::value)
+            .toList();
+    }
+    
     public Rank rankDecide(Lotto winNumbers) {
         return Rank.fromLottoNumber(winNumbers.findMatchCount(this));
     }
@@ -83,11 +89,6 @@ public record Lotto(List<LottoNumber> numbers) {
     }
     
     public boolean isContain(LottoNumber lottoNumber) {
-        for(LottoNumber number: this.numbers) {
-            if(lottoNumber.isSameNumber(number.value())) {
-                return true;
-            }
-        }
-        return false;
+        return this.numbers.contains(lottoNumber);
     }
 }
