@@ -21,4 +21,12 @@ class PayTest {
         assertThat(pay.convertToBuyCount())
             .isEqualTo(10);
     }
+    
+    @Test
+    void 금액을_음수로_입력하면_에러전파() {
+        assertThatThrownBy(() ->
+            new Pay(-1000)
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("금액은 양수로 입력하시오");
+    }
 }

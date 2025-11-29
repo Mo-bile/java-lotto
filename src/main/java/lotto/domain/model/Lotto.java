@@ -26,6 +26,23 @@ public record Lotto(List<LottoNumber> numbers) {
         this(getIntegers(ints));
     }
     
+    public Lotto {
+        lottoSizeValidate(numbers);
+        validateUniqueNumbers(numbers);
+    }
+    
+    private void lottoSizeValidate(List<LottoNumber> numbers) {
+        if(numbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 6자리여야한다");
+        }
+    }
+    
+    private void validateUniqueNumbers(List<LottoNumber> numbers) {
+        if(numbers.stream().distinct().count() != numbers.size()) {
+            throw new IllegalArgumentException("로또번호는 서로 달라야한다");
+        }
+    }
+    
     private static List<LottoNumber> getIntegers(int[] ints) {
         return convertToLottoNumbers(Arrays.stream(ints).boxed().toList());
     }

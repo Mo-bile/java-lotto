@@ -14,7 +14,7 @@ public record LottoGame(Pay pay, LottoTickets lottoTickets) {
     }
     
     public List<Lotto> getLottos() {
-        return this.lottoTickets.tickets();
+        return List.copyOf(this.lottoTickets.tickets());
     }
     
     public WinningResult calculateWinningResult(String winnerLottoNumber, int bonus) {
