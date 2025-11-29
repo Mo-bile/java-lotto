@@ -17,10 +17,10 @@ public record LottoTickets(List<Lotto> tickets) {
         return lottos;
     }
     
-    public WinningResult identifyWinners(Lotto winnerLotto, LottoNumber bonusNumber) {
+    public WinningResult identifyWinners(WinningLotto winningLotto) {
         WinningResult winningResult = new WinningResult();
         for(Lotto lotto: this.tickets) {
-            winningResult.recordRank(lotto.rankDecide(winnerLotto).rankDecideByBonusNumber(lotto, bonusNumber));
+            winningResult.recordRank(lotto.rankDecide(winningLotto));
         }
         return winningResult;
     }

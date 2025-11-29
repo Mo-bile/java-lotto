@@ -19,7 +19,7 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(List.of(
             new Lotto(1, 2, 3, 4, 5, 6), new Lotto(40, 41, 42, 43, 44, 45)));
         
-        WinningResult winningResult = lottoTickets.identifyWinners(new Lotto(35, 36, 37, 43, 44, 45), new LottoNumber(1));
+        WinningResult winningResult = lottoTickets.identifyWinners(new WinningLotto(new Lotto(35, 36, 37, 43, 44, 45), new LottoNumber(1)));
         WinningResult expectedWinner = new WinningResult();
         expectedWinner.recordRank(Rank.MISS);
         expectedWinner.recordRank(Rank.FIFTH);
@@ -31,7 +31,7 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(List.of(
             new Lotto(10, 41, 42, 43, 44, 45), new Lotto(20, 41, 42, 43, 44, 45)));
         
-        WinningResult winningResult = lottoTickets.identifyWinners(new Lotto(35, 41, 42, 43, 44, 45), new LottoNumber(20));
+        WinningResult winningResult = lottoTickets.identifyWinners(new WinningLotto(new Lotto(35, 41, 42, 43, 44, 45), new LottoNumber(20)));
         WinningResult expectedWinner = new WinningResult();
         expectedWinner.recordRank(Rank.SECOND);
         expectedWinner.recordRank(Rank.THIRD);

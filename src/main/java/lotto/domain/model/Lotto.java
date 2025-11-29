@@ -74,8 +74,10 @@ public record Lotto(List<LottoNumber> numbers) {
             .toList();
     }
     
-    public Rank rankDecide(Lotto winNumbers) {
-        return Rank.fromLottoNumber(winNumbers.findMatchCount(this));
+    public Rank rankDecide(WinningLotto winningLotto) {
+        int matchCount = this.findMatchCount(winningLotto.winNumbers());
+        boolean bonusMatch = this.isContain(winningLotto.bonusNumber());
+        return Rank.fromLottoNumber(matchCount, bonusMatch);
     }
     
     private int findMatchCount(Lotto winNumbers) {
@@ -91,4 +93,5 @@ public record Lotto(List<LottoNumber> numbers) {
     public boolean isContain(LottoNumber lottoNumber) {
         return this.numbers.contains(lottoNumber);
     }
+    
 }

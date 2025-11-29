@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.LottoNumber;
 
@@ -19,7 +20,13 @@ public enum Rank {
         this.winnerReturn = winnerReturn;
     }
     
-    public static Rank fromLottoNumber(int matchCount) {
+    public static Rank fromLottoNumber(int matchCount, boolean bonusMatch) {
+        if(matchCount == 5) {
+            if(bonusMatch) {
+                return SECOND;
+            }
+            return THIRD;
+        }
         for(Rank r: values()) {
             if(r.matchCount == matchCount) {
                 return r;
@@ -32,17 +39,4 @@ public enum Rank {
         return winnerReturn;
     }
     
-    public Rank rankDecideByBonusNumber(Lotto lotto, LottoNumber bonus) {
-        if(this.isSecondOrThird()) {
-            if(lotto.isContain(bonus)) {
-                return SECOND;
-            }
-            return THIRD;
-        }
-        return this;
-    }
-    
-    private boolean isSecondOrThird() {
-        return this == THIRD || this == SECOND;
-    }
 }
