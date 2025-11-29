@@ -16,7 +16,7 @@ class LottoTest {
     }
     
     @ParameterizedTest
-    @ValueSource(ints = {0,46})
+    @ValueSource(ints = {0, 46})
     void 로또번호가_범위_밖이면_에러(int num) {
         assertThatThrownBy(() ->
             new Lotto(num, 1, 2, 3, 4, 5)
@@ -25,18 +25,18 @@ class LottoTest {
     }
     
     @Test
-    public void 로또번호4개_일치하면_FOUR_MATCH가_반환된다 () {
+    public void 로또번호4개_일치하면_FOUR_MATCH가_반환된다() {
         Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
         Rank rank = lotto.rankDecide(new Lotto(42, 36, 37, 43, 44, 45));
         assertThat(rank).isEqualTo(Rank.FOURTH);
     }
     
     @Test
-    public void 로또번호6개_일치하면_SIX_MATCH가_반환된다 () {
+    public void 로또번호6개_일치하면_SIX_MATCH가_반환된다() {
         Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
         Rank rank = lotto.rankDecide(new Lotto(42, 41, 40, 43, 44, 45));
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
-
+    
     
 }

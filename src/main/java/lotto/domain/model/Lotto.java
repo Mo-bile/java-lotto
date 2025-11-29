@@ -23,7 +23,7 @@ public record Lotto(List<LottoNumber> numbers) {
         this(generateLottoNumberByInput(lottoNumbers));
     }
     
-    public Lotto(int ... ints) {
+    public Lotto(int... ints) {
         this(getIntegers(ints));
     }
     
@@ -61,7 +61,7 @@ public record Lotto(List<LottoNumber> numbers) {
     
     private static List<Integer> generateNumberList() {
         List<Integer> numberList = new ArrayList<>();
-        for(int i = MIN_LOTTO_NUMBER ; i < MAX_LOTTO_NUMBER ; i++) {
+        for(int i = MIN_LOTTO_NUMBER; i < MAX_LOTTO_NUMBER; i++) {
             numberList.add(i);
         }
         Collections.shuffle(numberList);

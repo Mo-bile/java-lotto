@@ -2,7 +2,8 @@ package lotto.domain.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import lotto.domain.Rank;
 
@@ -16,7 +17,7 @@ public record WinningResult(Map<Rank, Integer> winningRankCounts) {
     
     private static Map<Rank, Integer> createInitMap() {
         Map<Rank, Integer> map = new HashMap<>();
-        for (Rank rank: Rank.values()) {
+        for(Rank rank: Rank.values()) {
             map.put(rank, INIT_COUNT);
         }
         return map;

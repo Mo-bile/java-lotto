@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.model.LottoNumber;
 import lotto.domain.model.Lotto;
+import lotto.domain.model.LottoNumber;
 
 public enum Rank {
     MISS(0, 0),
@@ -20,8 +20,10 @@ public enum Rank {
     }
     
     public static Rank fromLottoNumber(int matchCount) {
-        for (Rank r : values()) {
-            if (r.matchCount == matchCount) return r;
+        for(Rank r: values()) {
+            if(r.matchCount == matchCount) {
+                return r;
+            }
         }
         return MISS;
     }

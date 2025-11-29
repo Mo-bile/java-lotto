@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 class LottoNumberTest {
     
     @ParameterizedTest
-    @ValueSource(ints = {0,46})
+    @ValueSource(ints = {0, 46})
     void 로또번호가_범위_밖이면_에러(int num) {
         assertThatThrownBy(() ->
             new LottoNumber(num)

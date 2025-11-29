@@ -18,7 +18,7 @@ public class Calculator {
     
     public int calculate() {
         AccumulatorController controller = new AccumulatorController();
-        for(String currentSymbol : stringInput.extractArithmeticQueue()) {
+        for(String currentSymbol: stringInput.extractArithmeticQueue()) {
             controller.extractOperator(currentSymbol);
             this.result = controller.accumulateNum(currentSymbol);
         }
