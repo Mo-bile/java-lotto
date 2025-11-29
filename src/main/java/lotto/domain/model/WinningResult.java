@@ -2,9 +2,10 @@ package lotto.domain.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import lotto.domain.Rank;
 
 public record WinningResult(Map<Rank, Integer> winningRankCounts) {
@@ -16,11 +17,8 @@ public record WinningResult(Map<Rank, Integer> winningRankCounts) {
     }
     
     private static Map<Rank, Integer> createInitMap() {
-        Map<Rank, Integer> map = new HashMap<>();
-        for(Rank rank: Rank.values()) {
-            map.put(rank, INIT_COUNT);
-        }
-        return map;
+        return Arrays.stream(Rank.values())
+            .collect(Collectors.toMap(rank -> rank, rank -> INIT_COUNT));
     }
     
     public String calculateTotalReturn(int pay) {

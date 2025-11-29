@@ -1,8 +1,8 @@
 package lotto.domain.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public record LottoTickets(List<Lotto> tickets) {
     
@@ -15,11 +15,10 @@ public record LottoTickets(List<Lotto> tickets) {
     }
     
     private static List<Lotto> generateLottos(int num) {
-        List<Lotto> lottos = new ArrayList<>();
-        for(int i = 0; i < num; i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
+        return IntStream
+            .range(0, num)
+            .mapToObj(i -> new Lotto())
+            .toList();
     }
     
     private static List<Lotto> generateLottos(Lotto... lottos) {
@@ -28,9 +27,9 @@ public record LottoTickets(List<Lotto> tickets) {
     
     public WinningResult identifyWinners(WinningLotto winningLotto) {
         WinningResult winningResult = new WinningResult();
-        for(Lotto lotto: this.tickets) {
-            winningResult.recordRank(winningLotto.rankDecide(lotto));
-        }
+        this.tickets.stream()
+            .map(winningLotto::rankDecide)
+            .forEach(winningResult::recordRank);
         return winningResult;
     }
     
