@@ -32,7 +32,7 @@ public class ResultView {
             System.out.printf("총 수익률은 %s입니다.%n", totalReturnRate);
         }
     }
-
+    
     public static void printError(String message) {
         System.out.println(message);
     }
