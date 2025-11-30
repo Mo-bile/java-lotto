@@ -2,12 +2,8 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import lotto.domain.business.LottoBuyResult;
+import lotto.domain.business.LottoBuy;
 import lotto.domain.business.LottoGame;
-import lotto.domain.model.BuyCount;
-import lotto.domain.model.LottoTickets;
 import lotto.domain.model.WinningResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -23,10 +19,10 @@ public class LottoApplication {
         for(int i = 0; i < Integer.parseInt(manualNumber); i++) {
             manualLottoNumbers.add(InputView.inputManulLotto());
         }
-        LottoBuyResult lottoBuyResult = new LottoBuyResult(pay, manualLottoNumbers);
-        ResultView.printAutoManualCount(lottoBuyResult.combineBuyCount());
+        LottoBuy lottoBuy = new LottoBuy(pay, manualLottoNumbers);
+        ResultView.printAutoManualCount(lottoBuy.combineBuyCount());
         
-        LottoGame lottoGame = new LottoGame(pay, lottoBuyResult.combineLotto());
+        LottoGame lottoGame = new LottoGame(pay, lottoBuy.combineLotto());
         ResultView.printLottos(lottoGame.getLottos());
         
         String winningNumbers = InputView.inputWinningNumbers();

@@ -4,22 +4,22 @@ import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.model.*;
 
-public class LottoBuyResult {
+public class LottoBuy {
     private final BuyCount buyCount;
     private final Manual manual;
     private final Auto auto;
     
-    public LottoBuyResult(String pay, List<String> manualLottoNumbers) {
+    public LottoBuy(String pay, List<String> manualLottoNumbers) {
         this(Integer.parseInt(pay), manualLottoNumbers);
     }
     
-    public LottoBuyResult(int pay, List<String> manualLottoNumbers) {
+    public LottoBuy(int pay, List<String> manualLottoNumbers) {
         this(new BuyCount(getTotalNumber(pay), manualLottoNumbers.size(),getTotalNumber(pay) - manualLottoNumbers.size()),
             new Manual(toLottoList(manualLottoNumbers)),
             new Auto(getTotalNumber(pay) - manualLottoNumbers.size()));
     }
     
-    public LottoBuyResult(BuyCount buyCount, Manual manual, Auto auto) {
+    public LottoBuy(BuyCount buyCount, Manual manual, Auto auto) {
         this.buyCount = buyCount;
         this.manual = manual;
         this.auto = auto;
