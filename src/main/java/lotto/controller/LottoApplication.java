@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.business.LottoBuyResult;
 import lotto.domain.business.LottoGame;
+import lotto.domain.model.BuyCount;
 import lotto.domain.model.LottoTickets;
 import lotto.domain.model.WinningResult;
 import lotto.view.InputView;
@@ -18,13 +19,14 @@ public class LottoApplication {
         int manualNumber = InputView.inputManulNumber();
         
         List<String> manualLottoNumbers = new ArrayList<>();
+        InputView.inputManulMessage();
         for(int i = 0; i < manualNumber; i++) {
             manualLottoNumbers.add(InputView.inputManulLotto());
         }
-        LottoTickets lottoTickets = new LottoBuyResult(pay, manualNumber, manualLottoNumbers).combineLotto();
         
-        
-        LottoGame lottoGame = new LottoGame(pay, lottoTickets);
+        LottoBuyResult lottoBuyResult = new LottoBuyResult(pay, manualLottoNumbers);
+        ResultView.printAutoManualCount(lottoBuyResult.combineBuyCount());
+        LottoGame lottoGame = new LottoGame(pay, lottoBuyResult.combineLotto());
         ResultView.printLottos(lottoGame.getLottos());
         
         String winningNumbers = InputView.inputWinningNumbers();

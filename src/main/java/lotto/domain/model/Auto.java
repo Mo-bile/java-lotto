@@ -5,15 +5,13 @@ import java.util.stream.IntStream;
 
 public class Auto {
     
-    private final int autoNumber;
     private final List<Lotto> autoLottoList;
     
     public Auto(int autoNumber) {
-        this(autoNumber, generateLottos(autoNumber));
+        this(generateLottos(autoNumber));
     }
     
-    public Auto(int autoNumber, List<Lotto> autoLottoList) {
-        this.autoNumber = autoNumber;
+    public Auto(List<Lotto> autoLottoList) {
         this.autoLottoList = autoLottoList;
     }
     

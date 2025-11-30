@@ -2,17 +2,20 @@ package lotto.view;
 
 import java.util.List;
 import lotto.domain.Rank;
+import lotto.domain.model.BuyCount;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.WinningResult;
 
 public class ResultView {
     
     public static void printLottos(List<Lotto> lottoList) {
-        System.out.println(lottoList.size() + "개를 구매했습니다.");
-        
         for(Lotto lotto: lottoList) {
             System.out.println(lotto.numberValues());
         }
+    }
+    
+    public static void printAutoManualCount(BuyCount buyCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", buyCount.getManual(), buyCount.getAuto());
     }
     
     public static void printResult(WinningResult winningResult, String totalReturnRate) {

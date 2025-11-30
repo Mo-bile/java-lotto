@@ -4,30 +4,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import lotto.domain.model.Lotto;
-import lotto.domain.model.Manual;
 import org.junit.jupiter.api.Test;
 
 class LottoBuyResultTest {
     
     @Test
-    void pay한만큼_로또_생성을_했다() {
-        LottoBuyResult lottoBuyResult = new LottoBuyResult(5000, 1, List.of("1,2,3,4,5,6"));
-        assertThat(lottoBuyResult.getPay().convertToBuyCount()).isEqualTo(5);
+    void 수동으로_생성한_만큼_보여준다() {
+        LottoBuyResult lottoBuyResult = new LottoBuyResult(5000, List.of("1,2,3,4,5,6"));
+        assertThat(lottoBuyResult.combineBuyCount().getManual()).isEqualTo(1);
+    }
+    
+    @Test
+    void 자동으로_생성한_만큼_보여준다() {
+        LottoBuyResult lottoBuyResult = new LottoBuyResult(5000, List.of("1,2,3,4,5,6"));
+        assertThat(lottoBuyResult.combineBuyCount().getAuto()).isEqualTo(4);
     }
     
     @Test
     void 수동생성에다가_자동생성을_합친것을_보여준다() {
-        LottoBuyResult lottoBuyResult = new LottoBuyResult(5000, 1, List.of("1,2,3,4,5,6"));
+        LottoBuyResult lottoBuyResult = new LottoBuyResult(5000, List.of("1,2,3,4,5,6"));
         assertThat(lottoBuyResult.combineLotto().tickets()).hasSize(5);
     }
     
-    @Test
-    void 수동구매_갯수가_구매가능갯수보다_많으면_에러전파() {
-        Manual manual = new Manual(2, List.of(new Lotto(), new Lotto()));
-        assertThatThrownBy(() ->
-            manual.validateLimit(1)
-        ).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("수동구매 갯수가 구매가능갯수보다 많다.");
-    }
 }

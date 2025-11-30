@@ -5,36 +5,31 @@ import java.util.List;
 import lotto.domain.model.*;
 
 public class LottoBuyResult {
-    
-    private final Pay pay;
+    private final BuyCount buyCount;
     private final Manual manual;
     private final Auto auto;
     
-    public LottoBuyResult(int pay, int manualNumber, List<String> lottoNumbers) {
-        this(new Pay(pay),
-            new Manual(manualNumber, toLottoList(lottoNumbers)),
-            new Auto(getAutoNumber(pay, manualNumber)));
+    public LottoBuyResult(int pay, List<String> manualLottoNumbers) {
+        this(new Manual(toLottoList(manualLottoNumbers)),
+            new Auto(getTotalNumber(pay) - manualLottoNumbers.size()),
+            new BuyCount(getTotalNumber(pay), manualLottoNumbers.size(), getTotalNumber(pay) - manualLottoNumbers.size())
+        );
     }
     
-    private static int getAutoNumber(int pay, int manualNumber) {
-        return new Pay(pay).convertToBuyCount() - manualNumber;
-    }
-    
-    public LottoBuyResult(Pay pay, Manual manual, Auto auto) {
-        validate(pay, manual);
-        this.pay = pay;
+    public LottoBuyResult(Manual manual, Auto auto, BuyCount buyCount) {
         this.manual = manual;
         this.auto = auto;
+        this.buyCount = buyCount;
+    }
+    
+    private static int getTotalNumber(int pay) {
+        return new Pay(pay).convertToBuyCount();
     }
     
     private static List<Lotto> toLottoList(List<String> lottoNumbers) {
         return lottoNumbers.stream()
             .map(Lotto::new)
             .toList();
-    }
-    
-    public Pay getPay() {
-        return pay;
     }
     
     public LottoTickets combineLotto() {
@@ -44,7 +39,7 @@ public class LottoBuyResult {
         return new LottoTickets(lottoList);
     }
     
-    private void validate(Pay pay, Manual manual) {
-        manual.validateLimit(pay.convertToBuyCount());
+    public BuyCount combineBuyCount() {
+        return this.buyCount;
     }
 }
