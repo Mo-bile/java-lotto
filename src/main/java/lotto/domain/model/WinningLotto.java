@@ -20,10 +20,6 @@ public record WinningLotto(LottoNumber bonusNumber, Lotto winNumbers) {
         this(new LottoNumber(bonusNumber), new Lotto(winNumbers));
     }
     
-    public WinningLotto(Lotto winNumbers) {
-        this(new LottoNumber(1), winNumbers);
-    }
-    
     public WinningLotto {
         valid(winNumbers, bonusNumber);
     }
