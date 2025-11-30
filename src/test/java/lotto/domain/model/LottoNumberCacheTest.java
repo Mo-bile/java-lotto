@@ -13,7 +13,7 @@ class LottoNumberCacheTest {
     @Test
     void lottoNumber를_입력하면_필요한_LottoNumber객체를_반환한다() {
         assertThat(LottoNumberCache.getLottoNumber(5))
-            .isEqualTo(new LottoNumber(5));
+            .isEqualTo(LottoNumber.of(5));
     }
     
     @ParameterizedTest

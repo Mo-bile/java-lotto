@@ -83,7 +83,7 @@ public record Lotto(List<LottoNumber> numbers) {
     
     public List<Integer> numberValues() {
         return this.numbers.stream()
-            .map(LottoNumber::value)
+            .map(LottoNumber::getValue)
             .toList();
     }
     

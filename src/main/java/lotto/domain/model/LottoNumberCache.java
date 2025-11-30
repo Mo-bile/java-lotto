@@ -23,7 +23,7 @@ public class LottoNumberCache {
             .collect(
                 Collectors.toMap(
                     Function.identity(),
-                    LottoNumber::new)
+                    LottoNumber::of)
             );
     }
     

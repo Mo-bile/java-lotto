@@ -11,7 +11,7 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void 로또번호가_범위_밖이면_에러(int num) {
         assertThatThrownBy(() ->
-            new LottoNumber(num)
+            LottoNumber.of(num)
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessage("로또 번호는 1~45사이 입력하시오");
     }
