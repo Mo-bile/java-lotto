@@ -2,7 +2,7 @@ package lotto.domain.model;
 
 import java.util.Objects;
 
-public class LottoNumber{
+public class LottoNumber {
     
     private final int value;
     

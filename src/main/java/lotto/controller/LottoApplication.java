@@ -15,7 +15,9 @@ public class LottoApplication {
         String manualNumber = InputView.inputManulNumber();
         
         List<String> manualLottoNumbers = new ArrayList<>();
-        if(manualNumber.isEmpty()) InputView.inputManulMessage();
+        if(manualNumber.isEmpty()) {
+            InputView.inputManulMessage();
+        }
         for(int i = 0; i < Integer.parseInt(manualNumber); i++) {
             manualLottoNumbers.add(InputView.inputManulLotto());
         }

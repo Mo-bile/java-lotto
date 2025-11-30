@@ -15,7 +15,7 @@ public class ResultView {
     }
     
     public static void printAutoManualCount(BuyCount buyCount) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", buyCount.getManual(), buyCount.getAuto());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", buyCount.manual(), buyCount.auto());
     }
     
     public static void printResult(WinningResult winningResult, String totalReturnRate) {
