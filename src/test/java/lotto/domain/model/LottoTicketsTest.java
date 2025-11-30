@@ -28,7 +28,7 @@ class LottoTicketsTest {
     void 당첨2등과_3등이면_무엇인지_알려준다() {
         LottoTickets lottoTickets = new LottoTickets(new Lotto(10, 41, 42, 43, 44, 45), new Lotto(20, 41, 42, 43, 44, 45));
         
-        WinningResult winningResult = lottoTickets.identifyWinners(new WinningLotto(new LottoNumber(20), new Lotto(35, 41, 42, 43, 44, 45)));
+        WinningResult winningResult = lottoTickets.identifyWinners(new WinningLotto(LottoNumberCache.getLottoNumber(20), new Lotto(35, 41, 42, 43, 44, 45)));
         WinningResult expectedWinner = new WinningResult();
         expectedWinner.recordRank(Rank.SECOND);
         expectedWinner.recordRank(Rank.THIRD);

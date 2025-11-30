@@ -49,7 +49,7 @@ public record Lotto(List<LottoNumber> numbers) {
     
     private static List<LottoNumber> generateLottoNumberByInput(String lottoNumbers) {
         return Arrays.stream(extractWinnerLottoNumber(lottoNumbers))
-            .map(LottoNumber::new)
+            .map(LottoNumberCache::getLottoNumber)
             .toList();
     }
     
@@ -77,7 +77,7 @@ public record Lotto(List<LottoNumber> numbers) {
     
     private static List<LottoNumber> convertToLottoNumbers(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-            .map(LottoNumber::new)
+            .map(LottoNumberCache::getLottoNumber)
             .toList();
     }
     

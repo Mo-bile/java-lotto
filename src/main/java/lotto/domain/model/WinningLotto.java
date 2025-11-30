@@ -5,19 +5,19 @@ import lotto.domain.Rank;
 public record WinningLotto(LottoNumber bonusNumber, Lotto winNumbers) {
     
     public WinningLotto(int bonusNumber, int... winNumbers) {
-        this(new LottoNumber(bonusNumber), new Lotto(winNumbers));
+        this(LottoNumberCache.getLottoNumber(bonusNumber), new Lotto(winNumbers));
     }
     
     public WinningLotto(String bonusNumber, int... winNumbers) {
-        this(new LottoNumber(bonusNumber), new Lotto(winNumbers));
+        this(LottoNumberCache.getLottoNumber(bonusNumber), new Lotto(winNumbers));
     }
     
     public WinningLotto(String bonusNumber, String winNumbers) {
-        this(new LottoNumber(bonusNumber), new Lotto(winNumbers));
+        this(LottoNumberCache.getLottoNumber(bonusNumber), new Lotto(winNumbers));
     }
     
     public WinningLotto(int bonusNumber, String winNumbers) {
-        this(new LottoNumber(bonusNumber), new Lotto(winNumbers));
+        this(LottoNumberCache.getLottoNumber(bonusNumber), new Lotto(winNumbers));
     }
     
     public WinningLotto {

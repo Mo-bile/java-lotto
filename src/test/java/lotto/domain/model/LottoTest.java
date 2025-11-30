@@ -15,7 +15,7 @@ class LottoTest {
         assertThatThrownBy(() ->
             new Lotto(num, 1, 2, 3, 4, 5)
         ).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("보너스 번호는 1~45사이 입력하시오");
+            .hasMessage("로또 번호는 1~45사이 입력하시오");
     }
     
     @Test
