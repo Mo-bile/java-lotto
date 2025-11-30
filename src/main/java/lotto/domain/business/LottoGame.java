@@ -9,6 +9,10 @@ public record LottoGame(Pay pay, LottoTickets lottoTickets) {
         this(new Pay(pay), generateLottos(new Pay(pay)));
     }
     
+    public LottoGame(int pay, LottoTickets lottoTickets) {
+        this(new Pay(pay), lottoTickets);
+    }
+    
     private static LottoTickets generateLottos(Pay pay) {
         return new LottoTickets(pay.convertToBuyCount());
     }

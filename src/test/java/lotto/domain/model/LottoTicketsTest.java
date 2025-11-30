@@ -8,12 +8,6 @@ import org.junit.jupiter.api.Test;
 class LottoTicketsTest {
     
     @Test
-    void 갯수를_입력받으면_로또를_생성한다() {
-        LottoTickets lottoTickets = new LottoTickets(10);
-        assertThat(lottoTickets.tickets()).hasSize(10);
-    }
-    
-    @Test
     void 당첨번호를_입력받으면_당첨번호와_몇개_당첨인지_알린다() {
         LottoTickets lottoTickets = new LottoTickets(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(40, 41, 42, 43, 44, 45));
         

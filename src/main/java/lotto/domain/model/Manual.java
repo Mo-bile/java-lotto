@@ -17,6 +17,10 @@ public class Manual {
         this.manualLottoList = manualLottoList;
     }
     
+    public List<Lotto> getManualLottoList() {
+        return manualLottoList;
+    }
+    
     private void validateDifference(int manulNumber, List<Lotto> manulLottoList) {
         if(manulNumber != manulLottoList.size()) {
             throw new IllegalArgumentException("수동 구매 갯수와 수동 입력 로또 수가 다르다.");

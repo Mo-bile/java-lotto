@@ -1,5 +1,6 @@
 package lotto.domain.business;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -11,12 +12,14 @@ class LottoBuyResultTest {
     
     @Test
     void pay한만큼_로또_생성을_했다() {
-    
+        LottoBuyResult lottoBuyResult = new LottoBuyResult(5000, 1, List.of("1,2,3,4,5,6"));
+        assertThat(lottoBuyResult.getPay().convertToBuyCount()).isEqualTo(5);
     }
     
     @Test
     void 수동생성에다가_자동생성을_합친것을_보여준다() {
-    
+        LottoBuyResult lottoBuyResult = new LottoBuyResult(5000, 1, List.of("1,2,3,4,5,6"));
+        assertThat(lottoBuyResult.combineLotto().tickets()).hasSize(5);
     }
     
     @Test
