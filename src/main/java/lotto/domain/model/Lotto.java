@@ -12,7 +12,7 @@ public record Lotto(List<LottoNumber> numbers) {
     public static final String EMPTY = "";
     public static final String COMMA = ",";
     public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 46;
+    public static final int MAX_LOTTO_NUMBER = 45;
     
     public Lotto() {
         this(generateLottoNumberByPay());
@@ -69,7 +69,7 @@ public record Lotto(List<LottoNumber> numbers) {
     
     private static List<Integer> generateNumberList() {
         List<Integer> numberList = new ArrayList<>();
-        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
             .forEach(numberList::add);
         Collections.shuffle(numberList);
         return numberList;
