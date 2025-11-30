@@ -1,7 +1,7 @@
 package lotto.domain.business;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import lotto.domain.model.*;
 
 public class LottoBuyResult {
@@ -9,17 +9,20 @@ public class LottoBuyResult {
     private final Manual manual;
     private final Auto auto;
     
-    public LottoBuyResult(int pay, List<String> manualLottoNumbers) {
-        this(new Manual(toLottoList(manualLottoNumbers)),
-            new Auto(getTotalNumber(pay) - manualLottoNumbers.size()),
-            new BuyCount(getTotalNumber(pay), manualLottoNumbers.size(), getTotalNumber(pay) - manualLottoNumbers.size())
-        );
+    public LottoBuyResult(String pay, List<String> manualLottoNumbers) {
+        this(Integer.parseInt(pay), manualLottoNumbers);
     }
     
-    public LottoBuyResult(Manual manual, Auto auto, BuyCount buyCount) {
+    public LottoBuyResult(int pay, List<String> manualLottoNumbers) {
+        this(new BuyCount(getTotalNumber(pay), manualLottoNumbers.size(),getTotalNumber(pay) - manualLottoNumbers.size()),
+            new Manual(toLottoList(manualLottoNumbers)),
+            new Auto(getTotalNumber(pay) - manualLottoNumbers.size()));
+    }
+    
+    public LottoBuyResult(BuyCount buyCount, Manual manual, Auto auto) {
+        this.buyCount = buyCount;
         this.manual = manual;
         this.auto = auto;
-        this.buyCount = buyCount;
     }
     
     private static int getTotalNumber(int pay) {
@@ -33,10 +36,10 @@ public class LottoBuyResult {
     }
     
     public LottoTickets combineLotto() {
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.addAll(this.manual.getManualLottoList());
-        lottoList.addAll(this.auto.getAutoLottoList());
-        return new LottoTickets(lottoList);
+        return new LottoTickets(Stream.concat(
+            this.manual.getManualLottoList().stream(),
+            this.auto.getAutoLottoList().stream())
+            .toList());
     }
     
     public BuyCount combineBuyCount() {

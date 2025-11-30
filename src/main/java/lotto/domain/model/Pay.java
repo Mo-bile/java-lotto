@@ -4,6 +4,10 @@ public record Pay(int pay) {
     
     public static final int LOTTO_PRICE = 1000;
     
+    public Pay(String pay) {
+        this(Integer.parseInt(pay));
+    }
+    
     public Pay {
         validate(pay);
         positiveValidate(pay);

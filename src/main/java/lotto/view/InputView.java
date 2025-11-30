@@ -6,14 +6,14 @@ public class InputView {
     
     private static final Scanner scanner = new Scanner(System.in);
     
-    public static int inputPurchaseAmount() {
+    public static String inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        return scanner.nextLine();
     }
     
-    public static int inputBonusNumbers() {
+    public static String inputBonusNumbers() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        return scanner.nextLine();
     }
     
     public static String inputWinningNumbers() {
@@ -21,9 +21,9 @@ public class InputView {
         return scanner.nextLine();
     }
     
-    public static int inputManulNumber() {
+    public static String inputManulNumber() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        return scanner.nextLine();
     }
     
     public static void inputManulMessage() {
