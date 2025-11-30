@@ -2,7 +2,6 @@ package lotto.domain.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,5 +20,13 @@ class PayTest {
         Pay pay = new Pay(10000);
         assertThat(pay.convertToBuyCount())
             .isEqualTo(10);
+    }
+    
+    @Test
+    void 금액을_음수로_입력하면_에러전파() {
+        assertThatThrownBy(() ->
+            new Pay(-1000)
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("금액은 양수로 입력하시오");
     }
 }

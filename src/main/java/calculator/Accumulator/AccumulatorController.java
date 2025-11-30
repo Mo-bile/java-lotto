@@ -24,7 +24,7 @@ public class AccumulatorController {
     }
     
     public int accumulateNum(String current) {
-        if (current.matches(NUMBER_REGEX)) {
+        if(current.matches(NUMBER_REGEX)) {
             this.currentNum = Integer.parseInt(current);
             isFirstNumDecider();
             this.previousNum = accumulateNumber(this.operator, this.previousNum, this.currentNum);
@@ -33,13 +33,13 @@ public class AccumulatorController {
     }
     
     public void extractOperator(String current) {
-        if (current.matches(OPERATOR_REGEX)) {
+        if(current.matches(OPERATOR_REGEX)) {
             this.operator = current;
         }
     }
     
     private void isFirstNumDecider() {
-        if (this.isFirstNum) {
+        if(this.isFirstNum) {
             this.previousNum = this.currentNum;
             this.isFirstNum = false;
         }

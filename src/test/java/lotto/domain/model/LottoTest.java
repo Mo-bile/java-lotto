@@ -1,64 +1,37 @@
 package lotto.domain.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
-import lotto.domain.Match;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
     
-    @Test
-    public void 로또_6_자리를_생성한다() {
-        assertThat(new Lotto().numbers()).hasSize(6);
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    void 로또번호가_범위_밖이면_에러(int num) {
+        assertThatThrownBy(() ->
+            new Lotto(num, 1, 2, 3, 4, 5)
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("로또 번호는 1~45사이 입력하시오");
     }
     
     @Test
-    public void 로또_6자리는_1에서45사이이다() {
-        assertThat(new Lotto().numbers())
-            .allMatch(num -> num >= 1 && num <= 45);
+    void 로또_번호는_6자리가_아니면_에러() {
+        assertThatThrownBy(() ->
+            new Lotto(1, 2, 3, 4, 5)
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("로또 번호는 6자리여야한다");
     }
     
     @Test
-    public void 인자로들어온_로또번호가_3개_일치한다() {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        assertThat(lotto.findMatchCount(List.of(35, 36, 37, 43, 44, 45)))
-            .isEqualTo(3);
+    void 로또_번호는_서로가_다르지않으면_에러() {
+        assertThatThrownBy(() ->
+            new Lotto(1, 1, 3, 4, 5, 6)
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("로또번호는 서로 달라야한다");
     }
     
-    @Test
-    public void 인자로들어온_로또번호가_4개_일치한다() {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        assertThat(lotto.findMatchCount(List.of(42, 36, 37, 43, 44, 45)))
-            .isEqualTo(4);
-    }
-    
-    @Test
-    public void 로또번호4개_일치하면_FOUR_MATCH가_반환된다 () {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        Match match = lotto.match(new Lotto(42, 36, 37, 43, 44, 45));
-        assertThat(match).isEqualTo(Match.FOUR_MATCH);
-    }
-    
-    @Test
-    public void 인자로들어온_로또번호가_5개_일치한다() {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        assertThat(lotto.findMatchCount(List.of(42, 41, 37, 43, 44, 45)))
-            .isEqualTo(5);
-    }
-    
-    @Test
-    public void 인자로들어온_로또번호가_6개_일치한다() {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        assertThat(lotto.findMatchCount(List.of(42, 41, 40, 43, 44, 45)))
-            .isEqualTo(6);
-    }
-    
-    @Test
-    public void 로또번호6개_일치하면_SIX_MATCH가_반환된다 () {
-        Lotto lotto = new Lotto(40, 41, 42, 43, 44, 45);
-        Match match = lotto.match(new Lotto(42, 41, 40, 43, 44, 45));
-        assertThat(match).isEqualTo(Match.SIX_MATCH);
-    }
-
 }
