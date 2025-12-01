@@ -33,14 +33,13 @@ public class LottoApplication {
         String pay = InputView.inputPurchaseAmount();
         String manualCount = InputView.inputManulNumber();
         
-        LottoGenerator lottoGenerator = null;
+        LottoGenerator lottoGenerator = new LottoCombineGenerator();
         if(isAllAutoGenerate(manualCount)) {
             lottoGenerator = new LottoAutoGenerator();
         }
         if(isAllManualGenerate(manualCount, pay)) {
             lottoGenerator = new LottoManulGenerator();
         }
-        lottoGenerator = new LottoCombineGenerator();
         List<String> manualLottoNumbers = readManualLottos(manualCount);
         LottoBuy lottoBuy = lottoGenerator.generate(pay, manualLottoNumbers);
         
