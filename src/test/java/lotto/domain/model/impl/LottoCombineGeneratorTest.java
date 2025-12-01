@@ -1,27 +1,27 @@
-package lotto.domain.business;
+package lotto.domain.model.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import lotto.domain.model.Lotto;
+import lotto.domain.business.LottoBuy;
 import lotto.domain.model.LottoGenerator;
-import lotto.domain.model.impl.LottoCombineGenerator;
 import org.junit.jupiter.api.Test;
 
-class LottoBuyTest {
+class LottoCombineGeneratorTest {
     
     @Test
-    void 수동생성에다가_자동생성을_합친_수는_같다() {
+    void 수동으로_생성한_만큼_보여준다() {
         LottoGenerator lottoGenerator = new LottoCombineGenerator();
         LottoBuy lottoBuy = lottoGenerator.generate(5000, List.of("1,2,3,4,5,6"));
-        assertThat(lottoBuy.combineLotto().tickets()).hasSize(5);
+        
+        assertThat(lottoBuy.combineBuyCount().manual()).isEqualTo(1);
     }
     
     @Test
-    void 수동생성에다가_자동생성을_합친것_중_수동입력은_같다() {
+    void 자동으로_생성한_만큼_보여준다() {
         LottoGenerator lottoGenerator = new LottoCombineGenerator();
         LottoBuy lottoBuy = lottoGenerator.generate(5000, List.of("1,2,3,4,5,6"));
-        assertThat(lottoBuy.combineLotto().tickets().getFirst()).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
+        assertThat(lottoBuy.combineBuyCount().auto()).isEqualTo(4);
     }
     
 }

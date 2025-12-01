@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.stream.IntStream;
 import lotto.domain.business.LottoBuy;
 import lotto.domain.business.LottoGame;
+import lotto.domain.model.LottoGenerator;
 import lotto.domain.model.WinningResult;
+import lotto.domain.model.impl.LottoAutoGenerator;
+import lotto.domain.model.impl.LottoCombineGenerator;
+import lotto.domain.model.impl.LottoManulGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -28,8 +32,17 @@ public class LottoApplication {
     private void play() {
         String pay = InputView.inputPurchaseAmount();
         String manualCount = InputView.inputManulNumber();
+        
+        LottoGenerator lottoGenerator = null;
+        if(isAllAutoGenerate(manualCount)) {
+            lottoGenerator = new LottoAutoGenerator();
+        }
+        if(isAllManualGenerate(manualCount, pay)) {
+            lottoGenerator = new LottoManulGenerator();
+        }
+        lottoGenerator = new LottoCombineGenerator();
         List<String> manualLottoNumbers = readManualLottos(manualCount);
-        LottoBuy lottoBuy = new LottoBuy(pay, manualLottoNumbers);
+        LottoBuy lottoBuy = lottoGenerator.generate(pay, manualLottoNumbers);
         
         ResultView.printAutoManualCount(lottoBuy.combineBuyCount());
         LottoGame lottoGame = new LottoGame(pay, lottoBuy.combineLotto());
@@ -38,6 +51,14 @@ public class LottoApplication {
         WinningResult winningResult = lottoGame.calculateWinningResult(InputView.inputWinningNumbers(), InputView.inputBonusNumbers());
         String totalReturn = winningResult.calculateTotalReturn(pay);
         ResultView.printResult(winningResult, totalReturn);
+    }
+    
+    private static boolean isAllAutoGenerate(String manualCount) {
+        return manualCount.equals("0");
+    }
+    
+    private static boolean isAllManualGenerate(String manualCount, String pay) {
+        return Integer.parseInt(manualCount) == Integer.parseInt(pay) / 1000;
     }
     
     private List<String> readManualLottos(String count) {
