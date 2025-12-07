@@ -6,29 +6,30 @@ import lotto.domain.model.*;
 
 public class LottoCombineGenerator implements LottoGenerator {
     
+    private final int pay;
+    private final List<Lotto> manualLottoNumbers;
+    
+    public LottoCombineGenerator(int pay, String manualLottoNumbers) {
+        this(pay, List.of(manualLottoNumbers));
+    }
+    
+    public LottoCombineGenerator(String pay, List<String> manualLottoNumbers) {
+        this(Integer.parseInt(pay), manualLottoNumbers);
+    }
+    
+    public LottoCombineGenerator(int pay, List<String> manualLottoNumbers) {
+        this.pay = pay;
+        this.manualLottoNumbers = toLottoList(manualLottoNumbers);
+    }
+    
     @Override
-    public LottoBuy generate(int pay, List<String> manualLottoNumbers) {
+    public LottoBuy generate() {
         return
             new LottoBuy(
                 new BuyCount(getTotalNumber(pay), manualLottoNumbers.size(), getTotalNumber(pay) - manualLottoNumbers.size()),
-                new Manual(toLottoList(manualLottoNumbers)),
+                new Manual(manualLottoNumbers),
                 new Auto(getTotalNumber(pay) - manualLottoNumbers.size())
             );
-    }
-    
-    @Override
-    public LottoBuy generate(String pay, List<String> manualLottoNumbers) {
-        return generate(Integer.parseInt(pay), manualLottoNumbers);
-    }
-    
-    @Override
-    public LottoBuy generate(int pay) {
-        throw new IllegalArgumentException("수동생성에는 수동 입력이 필요합니다.");
-    }
-    
-    @Override
-    public LottoBuy generate(String pay) {
-        throw new IllegalArgumentException("수동생성에는 수동 입력이 필요합니다.");
     }
     
     private static int getTotalNumber(int pay) {

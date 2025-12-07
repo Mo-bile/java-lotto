@@ -6,32 +6,23 @@ import lotto.domain.model.*;
 
 public class LottoAutoGenerator implements LottoGenerator {
     
+    int pay;
+    
+    public LottoAutoGenerator(String pay) {
+        this(Integer.parseInt(pay));
+    }
+    
+    public LottoAutoGenerator(int pay) {
+        this.pay = pay;
+    }
+    
     @Override
-    public LottoBuy generate(int pay, List<String> manualLottoNumbers) {
+    public LottoBuy generate() {
         return new LottoBuy(
             new BuyCount(getTotalNumber(pay), 0, getTotalNumber(pay)),
             new Manual(List.of()),
             new Auto(getTotalNumber(pay))
         );
-    }
-    
-    @Override
-    public LottoBuy generate(String pay, List<String> manualLottoNumbers) {
-        return generate(Integer.parseInt(pay), manualLottoNumbers);
-    }
-    
-    @Override
-    public LottoBuy generate(int pay) {
-        return new LottoBuy(
-            new BuyCount(getTotalNumber(pay), 0, getTotalNumber(pay)),
-            new Manual(List.of()),
-            new Auto(getTotalNumber(pay))
-        );
-    }
-    
-    @Override
-    public LottoBuy generate(String pay) {
-        return generate(Integer.parseInt(pay));
     }
     
     private int getTotalNumber(int pay) {

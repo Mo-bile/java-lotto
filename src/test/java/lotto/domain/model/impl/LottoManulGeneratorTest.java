@@ -11,8 +11,8 @@ class LottoManulGeneratorTest {
     
     @Test
     void 수동으로_생성한_만큼_보여준다() {
-        LottoGenerator lottoGenerator = new LottoManulGenerator();
-        LottoBuy lottoBuy = lottoGenerator.generate(3000, List.of("1,2,3,4,5,6", "1,2,3,4,5,7", "1,2,3,4,5,9"));
+        LottoGenerator lottoGenerator = new LottoManulGenerator(3000, List.of("1,2,3,4,5,6", "1,2,3,4,5,7", "1,2,3,4,5,9"));
+        LottoBuy lottoBuy = lottoGenerator.generate();
         assertThat(lottoBuy.combineBuyCount().total()).isEqualTo(3);
     }
 }

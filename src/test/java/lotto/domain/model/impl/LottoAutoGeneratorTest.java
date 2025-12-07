@@ -10,8 +10,8 @@ class LottoAutoGeneratorTest {
     
     @Test
     void 자동으로_생성한_만큼_보여준다() {
-        LottoGenerator lottoGenerator = new LottoAutoGenerator();
-        LottoBuy lottoBuy = lottoGenerator.generate(5000);
+        LottoGenerator lottoGenerator = new LottoAutoGenerator(5000);
+        LottoBuy lottoBuy = lottoGenerator.generate();
         assertThat(lottoBuy.combineBuyCount().total()).isEqualTo(5);
     }
 }
