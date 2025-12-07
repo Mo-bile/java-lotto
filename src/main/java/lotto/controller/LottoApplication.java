@@ -6,9 +6,7 @@ import lotto.domain.business.LottoBuy;
 import lotto.domain.business.LottoGame;
 import lotto.domain.model.LottoGenerator;
 import lotto.domain.model.WinningResult;
-import lotto.domain.model.impl.LottoAutoGenerator;
 import lotto.domain.model.impl.LottoCombineGenerator;
-import lotto.domain.model.impl.LottoManulGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -33,7 +31,8 @@ public class LottoApplication {
         String pay = InputView.inputPurchaseAmount();
         String manualCount = InputView.inputManulNumber();
         
-        LottoGenerator lottoGenerator = createGenerator(pay, manualCount);
+        List<String> manualLottoNumbers = readManualLottos(manualCount);
+        LottoGenerator lottoGenerator = new LottoCombineGenerator(pay, manualLottoNumbers);
         LottoBuy lottoBuy = lottoGenerator.generate();
         
         ResultView.printAutoManualCount(lottoBuy.combineBuyCount());
@@ -43,38 +42,6 @@ public class LottoApplication {
         WinningResult winningResult = lottoGame.calculateWinningResult(InputView.inputWinningNumbers(), InputView.inputBonusNumbers());
         String totalReturn = winningResult.calculateTotalReturn(pay);
         ResultView.printResult(winningResult, totalReturn);
-    }
-    
-    private LottoGenerator createGenerator(String pay, String manualCount) {
-        if(isAllAutoGenerate(manualCount)) {
-            return new LottoAutoGenerator(pay);
-        }
-        
-        List<String> manualLottoNumbers = readManualLottos(manualCount);
-        if(isAllManualGenerate(manualCount, pay)) {
-            return new LottoManulGenerator(pay, manualLottoNumbers);
-        }
-        
-        if(isCombineGenerate(manualCount, pay)) {
-            return new LottoCombineGenerator(pay, manualLottoNumbers);
-        }
-        
-        throw new IllegalStateException("로또 생성기 결정 실패");
-    }
-    
-    private boolean isAllAutoGenerate(String manualCount) {
-        return manualCount.equals("0");
-    }
-    
-    private boolean isAllManualGenerate(String manualCount, String pay) {
-        return Integer.parseInt(manualCount) == Integer.parseInt(pay) / 1000;
-    }
-    
-    private boolean isCombineGenerate(String manualCount, String pay) {
-        if(isAllAutoGenerate(manualCount)) {
-            return false;
-        }
-        return Integer.parseInt(manualCount) != Integer.parseInt(pay) / 1000;
     }
     
     private List<String> readManualLottos(String count) {
