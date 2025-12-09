@@ -1,7 +1,7 @@
 package lotto.domain.model.impl;
 
 import java.util.List;
-import lotto.domain.business.LottoBuy;
+import java.util.stream.Stream;
 import lotto.domain.model.*;
 
 public class LottoCombineGenerator implements LottoGenerator {
@@ -23,13 +23,17 @@ public class LottoCombineGenerator implements LottoGenerator {
     }
     
     @Override
-    public LottoBuy generate() {
+    public LottoTickets generateTickets() {
         return
-            new LottoBuy(
-                new BuyCount(getTotalNumber(pay), manualLottoNumbers.size(), getTotalNumber(pay) - manualLottoNumbers.size()),
-                new Manual(manualLottoNumbers),
-                new Auto(getTotalNumber(pay) - manualLottoNumbers.size())
-            );
+            new LottoTickets(Stream.concat(
+                new Manual(manualLottoNumbers).manualLottoList().stream(),
+                new Auto(getTotalNumber(pay) - manualLottoNumbers.size()).autoLottoList().stream()
+            ).toList());
+    }
+    
+    @Override
+    public BuyCount getBuyCount() {
+        return new BuyCount(getTotalNumber(pay), manualLottoNumbers.size(), getTotalNumber(pay) - manualLottoNumbers.size());
     }
     
     private static int getTotalNumber(int pay) {

@@ -1,7 +1,5 @@
 package lotto.domain.model.impl;
 
-import java.util.List;
-import lotto.domain.business.LottoBuy;
 import lotto.domain.model.*;
 
 public class LottoAutoGenerator implements LottoGenerator {
@@ -17,12 +15,15 @@ public class LottoAutoGenerator implements LottoGenerator {
     }
     
     @Override
-    public LottoBuy generate() {
-        return new LottoBuy(
-            new BuyCount(getTotalNumber(pay), 0, getTotalNumber(pay)),
-            new Manual(List.of()),
-            new Auto(getTotalNumber(pay))
+    public LottoTickets generateTickets() {
+        return new LottoTickets(
+            new Auto(getTotalNumber(pay)).autoLottoList().stream().toList()
         );
+    }
+    
+    @Override
+    public BuyCount getBuyCount() {
+        return new BuyCount(getTotalNumber(pay), 0, getTotalNumber(pay));
     }
     
     private int getTotalNumber(int pay) {

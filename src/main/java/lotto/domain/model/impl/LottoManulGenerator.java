@@ -1,7 +1,6 @@
 package lotto.domain.model.impl;
 
 import java.util.List;
-import lotto.domain.business.LottoBuy;
 import lotto.domain.model.*;
 
 public class LottoManulGenerator implements LottoGenerator {
@@ -23,12 +22,13 @@ public class LottoManulGenerator implements LottoGenerator {
     }
     
     @Override
-    public LottoBuy generate() {
-        return new LottoBuy(
-            new BuyCount(getTotalNumber(pay), manualLottoNumbers.size(), 0),
-            new Manual(manualLottoNumbers),
-            new Auto(0)
-        );
+    public LottoTickets generateTickets() {
+        return new LottoTickets(manualLottoNumbers);
+    }
+    
+    @Override
+    public BuyCount getBuyCount() {
+        return new BuyCount(getTotalNumber(pay), manualLottoNumbers.size(), 0);
     }
     
     private static int getTotalNumber(int pay) {

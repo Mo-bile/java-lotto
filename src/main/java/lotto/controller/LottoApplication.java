@@ -2,7 +2,6 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import lotto.domain.business.LottoBuy;
 import lotto.domain.business.LottoGame;
 import lotto.domain.model.LottoGenerator;
 import lotto.domain.model.WinningResult;
@@ -33,10 +32,9 @@ public class LottoApplication {
         
         List<String> manualLottoNumbers = readManualLottos(manualCount);
         LottoGenerator lottoGenerator = new LottoCombineGenerator(pay, manualLottoNumbers);
-        LottoBuy lottoBuy = lottoGenerator.generate();
         
-        ResultView.printAutoManualCount(lottoBuy.combineBuyCount());
-        LottoGame lottoGame = new LottoGame(pay, lottoBuy.combineLotto());
+        ResultView.printAutoManualCount(lottoGenerator.getBuyCount());
+        LottoGame lottoGame = new LottoGame(pay, lottoGenerator.generateTickets());
         ResultView.printLottos(lottoGame.getLottos());
         
         WinningResult winningResult = lottoGame.calculateWinningResult(InputView.inputWinningNumbers(), InputView.inputBonusNumbers());
