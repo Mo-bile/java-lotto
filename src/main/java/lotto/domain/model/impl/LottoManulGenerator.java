@@ -5,19 +5,13 @@ import lotto.domain.model.*;
 
 public class LottoManulGenerator implements LottoGenerator {
     
-    private final int pay;
     private final List<Lotto> manualLottoNumbers;
     
-    public LottoManulGenerator(int pay, String manualLottoNumbers) {
-        this(pay, List.of(manualLottoNumbers));
+    public LottoManulGenerator(String manualLottoNumbers) {
+        this(List.of(manualLottoNumbers));
     }
     
-    public LottoManulGenerator(String pay, List<String> manualLottoNumbers) {
-        this(Integer.parseInt(pay), manualLottoNumbers);
-    }
-    
-    public LottoManulGenerator(int pay, List<String> manualLottoNumbers) {
-        this.pay = pay;
+    public LottoManulGenerator(List<String> manualLottoNumbers) {
         this.manualLottoNumbers = toLottoList(manualLottoNumbers);
     }
     
@@ -28,7 +22,7 @@ public class LottoManulGenerator implements LottoGenerator {
     
     @Override
     public BuyCount getBuyCount() {
-        return new BuyCount(getTotalNumber(pay), manualLottoNumbers.size(), 0);
+        return new BuyCount(manualLottoNumbers.size(), manualLottoNumbers.size(), 0);
     }
     
     private static int getTotalNumber(int pay) {
