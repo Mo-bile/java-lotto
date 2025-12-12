@@ -3,9 +3,9 @@ package lotto.controller;
 import java.util.List;
 import java.util.stream.IntStream;
 import lotto.domain.business.LottoGame;
-import lotto.domain.model.LottoGenerator;
+import lotto.domain.model.LottoGenertor.LottoCombineGenerator;
+import lotto.domain.model.LottoGenertor.LottoGenerator;
 import lotto.domain.model.WinningResult;
-import lotto.domain.model.impl.LottoCombineGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

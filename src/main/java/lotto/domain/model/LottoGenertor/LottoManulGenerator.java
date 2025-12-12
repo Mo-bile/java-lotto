@@ -1,7 +1,9 @@
-package lotto.domain.model.impl;
+package lotto.domain.model.LottoGenertor;
 
 import java.util.List;
-import lotto.domain.model.*;
+import lotto.domain.model.BuyCount;
+import lotto.domain.model.Lotto;
+import lotto.domain.model.LottoTickets;
 
 public class LottoManulGenerator implements LottoGenerator {
     
@@ -23,10 +25,6 @@ public class LottoManulGenerator implements LottoGenerator {
     @Override
     public BuyCount getBuyCount() {
         return new BuyCount(manualLottoNumbers.size(), manualLottoNumbers.size(), 0);
-    }
-    
-    private static int getTotalNumber(int pay) {
-        return new Pay(pay).convertToBuyCount();
     }
     
     private static List<Lotto> toLottoList(List<String> lottoNumbers) {

@@ -1,6 +1,11 @@
-package lotto.domain.model.impl;
+package lotto.domain.model.LottoGenertor;
 
-import lotto.domain.model.*;
+import java.util.List;
+import java.util.stream.IntStream;
+import lotto.domain.model.BuyCount;
+import lotto.domain.model.Lotto;
+import lotto.domain.model.LottoTickets;
+import lotto.domain.model.Pay;
 
 public class LottoAutoGenerator implements LottoGenerator {
     
@@ -16,9 +21,14 @@ public class LottoAutoGenerator implements LottoGenerator {
     
     @Override
     public LottoTickets generateTickets() {
-        return new LottoTickets(
-            new Auto(getTotalNumber(pay)).autoLottoList().stream().toList()
-        );
+        return new LottoTickets(generateLottos(getTotalNumber(pay)).stream().toList());
+    }
+    
+    private List<Lotto> generateLottos(int num) {
+        return IntStream
+            .range(0, num)
+            .mapToObj(i -> new Lotto())
+            .toList();
     }
     
     @Override

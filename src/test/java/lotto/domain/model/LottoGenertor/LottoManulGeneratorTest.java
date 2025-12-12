@@ -1,9 +1,8 @@
-package lotto.domain.model.impl;
+package lotto.domain.model.LottoGenertor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import lotto.domain.model.LottoGenerator;
 import lotto.domain.model.LottoTickets;
 import org.junit.jupiter.api.Test;
 
