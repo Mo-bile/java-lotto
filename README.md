@@ -234,3 +234,11 @@
 - [x] : LottoManulGenerator 에서 불필요한 pay 제거
     - 자동, 수동, 혼합 간에 필드는 비슷하게 pay, pay + lotto, lotto 각각 상황에 따라 인자가 달라짐
         - 즉 충분히 필드가 다를 수있다.
+
+## 4차 피드백 후 리팩터링
+
+- [x] : 이미 `LottoAutoGenerator`, `LottoManualGenerator` 각각의 구현체가 있는데 굳이 수동 자동관련 `Auto`, `Manual` 객체가 필요한지 고민할 것
+  - 고민 : 기존에는 Auto, Manual 이 필요할 수있었다. 그러나 인터페이스 구현체가 그 역할을 대체한다
+- [ ] : composite 패턴을 이용해 part 인 구현체 `LottoAutoGenerator`, `LottoManualGenerator` 를 합친 composite 인 `LottoCombineGenerator` 를 이용한다
+  - 그러면 필드도 두개 구현체를 합친 인터페이스의 List로 한다 그리고 기존 생성도 두개를 각각 넣어주는 방식으로 구현한다
+  - 즉 여러 LottoGenerator 를 묶어서 두개를 하나처럼 쓸 수 있게 됨
