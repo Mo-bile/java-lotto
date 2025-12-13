@@ -5,8 +5,20 @@ import lotto.domain.model.*;
 
 public record LottoGame(Pay pay, LottoTickets lottoTickets) {
     
+    public LottoGame(String pay, LottoTickets lottoTickets) {
+        this(new Pay(pay), lottoTickets);
+    }
+    
     public LottoGame(int pay) {
-        this(new Pay(pay), generateLottos(new Pay(pay)));
+        this(new Pay(pay));
+    }
+    
+    public LottoGame(int pay, LottoTickets lottoTickets) {
+        this(new Pay(pay), lottoTickets);
+    }
+    
+    private LottoGame(Pay pay) {
+        this(pay, generateLottos(pay));
     }
     
     private static LottoTickets generateLottos(Pay pay) {
@@ -19,5 +31,9 @@ public record LottoGame(Pay pay, LottoTickets lottoTickets) {
     
     public WinningResult calculateWinningResult(String winnerLottoNumber, int bonus) {
         return this.lottoTickets.identifyWinners(new WinningLotto(bonus, winnerLottoNumber));
+    }
+    
+    public WinningResult calculateWinningResult(String winnerLottoNumber, String bonus) {
+        return calculateWinningResult(winnerLottoNumber, Integer.parseInt(bonus));
     }
 }
