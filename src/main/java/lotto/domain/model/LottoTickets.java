@@ -14,6 +14,10 @@ public record LottoTickets(List<Lotto> tickets) {
         this(generateLottos(num));
     }
     
+    public int getLottoTicketCount() {
+        return tickets.size();
+    }
+    
     private static List<Lotto> generateLottos(int num) {
         return IntStream
             .range(0, num)

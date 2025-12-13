@@ -28,6 +28,10 @@ public record WinningResult(Map<Rank, Integer> winningRankCounts) {
         return rate.toPlainString();
     }
     
+    public String calculateTotalReturn(String pay) {
+        return calculateTotalReturn(Integer.parseInt(pay));
+    }
+    
     private BigDecimal getProfit() {
         BigDecimal profit = BigDecimal.ZERO;
         for(Entry<Rank, Integer> matchIntegerEntry: winningRankCounts.entrySet()) {

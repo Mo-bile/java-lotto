@@ -29,4 +29,10 @@ class PayTest {
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessage("금액은 양수로 입력하시오");
     }
+    
+    @Test
+    void 수동_3개_구매후_남은_금액계산은_3000원_빠진다() {
+        Pay pay = new Pay(10000);
+        assertThat(pay.calculateRemainingPayment(3)).isEqualTo(7000);
+    }
 }

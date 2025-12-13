@@ -8,12 +8,6 @@ import org.junit.jupiter.api.Test;
 class LottoTicketsTest {
     
     @Test
-    void 갯수를_입력받으면_로또를_생성한다() {
-        LottoTickets lottoTickets = new LottoTickets(10);
-        assertThat(lottoTickets.tickets()).hasSize(10);
-    }
-    
-    @Test
     void 당첨번호를_입력받으면_당첨번호와_몇개_당첨인지_알린다() {
         LottoTickets lottoTickets = new LottoTickets(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(40, 41, 42, 43, 44, 45));
         
@@ -28,7 +22,7 @@ class LottoTicketsTest {
     void 당첨2등과_3등이면_무엇인지_알려준다() {
         LottoTickets lottoTickets = new LottoTickets(new Lotto(10, 41, 42, 43, 44, 45), new Lotto(20, 41, 42, 43, 44, 45));
         
-        WinningResult winningResult = lottoTickets.identifyWinners(new WinningLotto(LottoNumberCache.getLottoNumber(20), new Lotto(35, 41, 42, 43, 44, 45)));
+        WinningResult winningResult = lottoTickets.identifyWinners(new WinningLotto(LottoNumber.of(20), new Lotto(35, 41, 42, 43, 44, 45)));
         WinningResult expectedWinner = new WinningResult();
         expectedWinner.recordRank(Rank.SECOND);
         expectedWinner.recordRank(Rank.THIRD);

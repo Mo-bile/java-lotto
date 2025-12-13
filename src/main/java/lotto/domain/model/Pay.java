@@ -1,16 +1,28 @@
 package lotto.domain.model;
 
-public record Pay(int pay) {
+public record Pay(int value) {
     
     public static final int LOTTO_PRICE = 1000;
     
+    public Pay(String pay) {
+        this(Integer.parseInt(pay));
+    }
+    
     public Pay {
-        validate(pay);
-        positiveValidate(pay);
+        validate(value);
+        positiveValidate(value);
     }
     
     public int convertToBuyCount() {
-        return this.pay / LOTTO_PRICE;
+        return this.value / LOTTO_PRICE;
+    }
+    
+    public int calculateRemainingPayment(int count) {
+        int remainPay = (convertToBuyCount() - count) * LOTTO_PRICE;
+        if(remainPay < 0) {
+            positiveValidate(remainPay);
+        }
+        return remainPay;
     }
     
     private static void validate(int pay) {
